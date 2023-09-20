@@ -32,9 +32,9 @@
                                 </div>
                                 <div class="project_txt">
                                     <div class="project_name">
-                                        <p class="title">타입 목록</p>
+                                        <p class="title">메일 목록</p>
                                         <div class="selectBox">
-                                            <input type="text" id="CMS_EMAIL_TYPE" class="link-selected" value="타입을 선택해주세요." readonly>
+                                            <input type="text" id="CMS_EMAIL_TYPE" class="link-selected" value="메일 제목을 선택해주세요." readonly>
                                             <ul>
                                                 <li><a href='#' class='link-select' data-code='add' data-title=''>추가하기</a></li>
                                             </ul>
@@ -43,7 +43,7 @@
 
                                     </div>
                                     <div class="project_name">
-                                        <p class="title">타입명</p>
+                                        <p class="title">메일 제목</p>
                                         <input type="text" name="typeName">
                                     </div>
                                     <div class="project_name">

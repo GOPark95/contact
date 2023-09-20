@@ -327,6 +327,7 @@ $(function(){
     $(document).on("click", ".add_btn", function(){
         var formData = new FormData();
         var type = $(this).hasClass("email") ? "emailBox" : "smsBox";
+        var typeNameString = type == "emailBox" ? "메일 제목":"타입명";
 
         // console.log(type)
         //데이터 검사
@@ -336,7 +337,7 @@ $(function(){
         }
 
         if($("#"+type+" input[name=typeName]").val() == ""){
-            alert("타입명을 입력해주세요.");
+            alert(typeNameString + "을 입력해주세요.");
             return false;
         }
 
@@ -418,6 +419,7 @@ $(function(){
     $(document).on("click", ".modify_btn", function(){
         var formData = new FormData();
         var type = $(this).hasClass("email") ? "emailBox" : "smsBox";
+        var typeNameString = type == "emailBox" ? "메일 제목":"타입명";
 
         // console.log(type)
         //데이터 검사
@@ -427,7 +429,7 @@ $(function(){
         }
 
         if($("#"+type+" input[name=typeName]").val() == ""){
-            alert("타입명을 입력해주세요.");
+            alert(typeNameString + "을 입력해주세요.");
             return false;
         }
 
