@@ -1,0 +1,297 @@
+/*로그인*/
+@font-face {
+    font-family: Noto-black;
+    src: url('../font/NotoSansKR-Black.otf');
+}
+
+@font-face {
+    font-family: Noto-Medium;
+    src: url('../font/NotoSansKR-Medium.otf');
+}
+
+@font-face {
+    font-family: Montserrat-Thin;
+    src: url('../font/Montserrat-Thin.ttf');
+}
+
+
+@font-face {
+    font-family: Montserrat;
+    src: url('../font/Montserrat-Black.ttf');
+}
+
+body, html{margin: 0; padding: 0; overflow-y: hidden;}
+/*로그인 폼 START*/
+.text-center{
+    text-align: center;
+}
+#container {
+    position: relative;
+    background-color: #f2f3f8;
+    height: 100%;
+    z-index: 50;
+    transition: all .3s;
+    padding: 1.5rem!important;
+    padding-top: 56px!important;
+    padding-bottom: 0!important;
+}
+
+div[id="loginWrap"] {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    height: 60%;
+    background-color: #fff;
+    border-radius: 10px; /*그림자*/
+    -webkit-box-shadow: 7px 11px 12px -7px rgba(0, 0, 0, 0.47);
+    -moz-box-shadow: 7px 11px 12px -7px rgba(0, 0, 0, 0.47);
+    box-shadow: 7px 11px 12px -7px rgba(0, 0, 0, 0.47);
+    /*border-top: 2px solid #0188FF;*/
+}
+
+div[class="MenuChk_login"] {
+    left: calc(45% + 260px)
+}
+
+div[class="login-form"] {
+    width: 100%;
+    padding: 30px 0px;
+    font-family: Noto-black;
+}
+
+.top-border {
+    border: 2px solid #0188FF;
+    border-radius: 10px 10px 0 0;
+}
+
+div[class="login-form"] > h1 {
+    font-family: Montserrat;
+    font-size: 55px;
+    color: #0188FF;
+    font-weight: 700;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    text-align: center;
+}
+
+.login-form .login-input {
+    width: 83%;
+    height: 45px;
+    margin: 0 auto;
+    margin-top: 20px;
+    border-radius: 5px;
+    background: #ececec;
+    /*border-bottom: solid 2px #cacaca;*/
+}
+
+.login-form .login-input .fa-user, .login-form .login-input .fa-unlock-alt {
+    color: #cacaca;
+    line-height: 45px;
+}
+
+.login-form .login-input input {
+    background: none;
+    border: none;
+    line-height: 43px;
+    padding-left: 10px;
+    width: 89%;
+    letter-spacing: 1px;
+    caret-color: #2B7DFE;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: Noto-black;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #ececec inset;
+}
+
+
+.login-form .login-input input:focus {
+    outline: none;
+}
+
+.login-form .login-input input::placeholder {
+    color: #cacaca;
+}
+
+.login-btn-wrap {
+    /*width: 83%;*/
+    margin-top: 20px;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*align-items: center;;*/
+}
+
+.login-btn-wrap .login-btn {
+    width: 83%;
+    height: 45px;
+    color: white;
+    border: 0;
+    border-radius: 4px;
+    background: #0188FF;
+    outline: none;
+    cursor: pointer;
+}
+
+.login-btn-wrap .login-btn:hover {
+    background: linear-gradient(162deg, rgb(81 148 253) 0%, rgb(22 111 251) 50%, rgb(0 99 255) 100%);
+}
+
+.login-form > .Logininfo {
+    position: absolute;
+    bottom: 20px;
+    left: 55%;
+    font-size: 14px;
+    font-family: Noto-Medium, serif;
+    font-weight: bold;
+}
+
+.error-form{
+    position: relative;
+
+}
+.login-form > p > #errorMsg {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 35%;
+    margin-top: 3%;
+    font-size: 15px;
+    background: #096ec6;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-family: Noto-Medium, serif ;
+}
+
+.login-type{
+    margin: 10px 30px;
+}
+
+.imageForm{
+    margin: 10% 0 5% 0;
+}
+
+.remember-form{
+    width: 83%;
+    margin: 0 auto;
+    margin-top: 4%;
+    text-align: left;
+}
+
+/*체크박스 css START*/
+.login-type input{
+    cursor: pointer;
+}
+.login-type input:last-of-type{
+    margin-left: 10px;
+}
+.login-type span{
+    font-family: Noto-Medium, serif;
+    font-weight: bold;
+    font-size: 14px;
+    vertical-align: top;
+}
+.login-type input{display: none;}
+.login-type input + label{
+    cursor: pointer;
+}
+.login-type input + label em{
+    position:relative;
+    display: inline-block;
+    width: 15px; height: 15px;
+    margin-right: 5px;
+    background-color: #4285F4;
+    border-radius: 2px;
+    cursor: pointer;
+    vertical-align: -2px;
+}
+.login-type input:checked + label em{
+    background-color: #2178ff;
+}
+.login-type input:checked + label em:before {
+    content: "";
+    position: absolute;
+    top: 7px;left: 4px;
+    width: 2px; height: 6px;
+    background-color: #fff;
+    transform: rotate(135deg);
+}
+.login-type input:checked + label em:after {
+    content: "";
+    position: absolute;
+    top: 3px;  left: 8px;
+    width: 2px; height: 10px;
+    background-color: #fff;
+    transform: rotate(35deg);
+}
+.login-type #contact + label{
+    margin-left: 10px;
+}
+
+
+
+#idRemember{
+    display: none;
+}
+
+#idRemember + label{
+    cursor: pointer;
+    font-family: Montserrat-Thin;
+    font-weight: bold;
+    color: #666666;
+}
+
+#idRemember + label i{
+    position:relative;
+    display: inline-block;
+    width: 15px; height: 15px;
+    margin-right: 5px;
+    border: 1px solid #D9D9D9;
+    border-radius: 2px;
+    cursor: pointer;
+    vertical-align: text-top;
+    /*vertical-align: -2px;*/
+    /*vertical-align: ;*/
+    /*cursor: pointer;*/
+}
+
+#idRemember:checked + label i:before {
+    content: "";
+    position: absolute;
+    top: 6px;left: 4px;
+    width: 2px; height: 6px;
+    background-color: #0188FF;
+    transform: rotate(135deg);
+}
+
+#idRemember:checked + label i:after {
+    content: "";
+    position: absolute;
+    top: 2px;  left: 8px;
+    width: 2px; height: 10px;
+    background-color: #0188FF;
+    transform: rotate(35deg);
+}
+
+/*체크박스 css END*/
+
+/*로그인 폼 END*/
+.active {
+    border-color: #2B7DFE !important;
+}
+
+.active .fa-user, .active .fa-unlock-alt, .active input {
+    color: #2B7DFE !important;
+}
+
+.star {
+    color: red;
+    vertical-align: middle;
+}
+
+
+

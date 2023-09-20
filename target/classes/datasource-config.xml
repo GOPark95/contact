@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <context:component-scan base-package="kric.com.kric">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <tx:annotation-driven/>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="realdataSource" />
+
+    <bean id="realdataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+        <property name="url" value="jdbc:sqlserver://1.235.195.34:1433;DatabaseName=project2"/>
+        <property name="username" value="sa"/>
+        <property name="password" value="krco#51304"/>
+        <property name="defaultAutoCommit" value="false"/>
+    </bean>
+
+    <bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+        <constructor-arg ref="realdataSource"/>
+        <property name="logFormatter">
+            <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+                <property name="loggingType" value="MULTI_LINE"/>
+                <property name="sqlPrefix" value="[SQL]"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="sqlSession"/>
+    </bean>
+
+    <!--2번째 SQL-->
+    <!--datasource 2-->
+
+    <bean id="realdataSource2" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+        <property name="url" value="jdbc:sqlserver://1.235.195.34:1433;DatabaseName=contact"/>
+        <property name="username" value="sa"/>
+        <property name="password" value="krco#51304"/>
+        <property name="defaultAutoCommit" value="false"/>
+    </bean>
+
+    <bean id="dataSource2" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+        <constructor-arg ref="realdataSource2"/>
+        <property name="logFormatter">
+            <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+                <property name="loggingType" value="MULTI_LINE"/>
+                <property name="sqlPrefix" value="[SQL]"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="sqlSession2" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="dataSource" ref="dataSource2"/>
+    </bean>
+
+    <bean id="sqlSessionTemplate2" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="sqlSession2"/>
+    </bean>
+
+    <!--3번째 SQL-->
+    <!--datasource 3-->
+
+    <bean id="realdataSource3" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+        <property name="url" value="jdbc:sqlserver://1.235.195.8:20022;DatabaseName=Contact"/>
+        <property name="username" value="kon"/>
+        <property name="password" value="kon#51304"/>
+        <property name="defaultAutoCommit" value="false"/>
+    </bean>
+
+    <bean id="dataSource3" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+        <constructor-arg ref="realdataSource3"/>
+        <property name="logFormatter">
+            <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+                <property name="loggingType" value="MULTI_LINE"/>
+                <property name="sqlPrefix" value="[SQL]"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="sqlSession3" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="dataSource" ref="dataSource3"/>
+    </bean>
+
+    <bean id="sqlSessionTemplate3" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="sqlSession3"/>
+    </bean>
+
+    <bean id="transactionManager3" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="realdataSource3" />
+    <!--4번째 SQL-->
+    <!--datasource 4-->
+
+    <bean id="realdataSource4" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+        <property name="url" value="jdbc:sqlserver://1.235.195.8:20022;DatabaseName=Kon"/>
+        <property name="username" value="kon"/>
+        <property name="password" value="kon#51304"/>
+        <property name="defaultAutoCommit" value="false"/>
+    </bean>
+
+    <bean id="dataSource4" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+        <constructor-arg ref="realdataSource4"/>
+        <property name="logFormatter">
+            <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+                <property name="loggingType" value="MULTI_LINE"/>
+                <property name="sqlPrefix" value="[SQL]"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="sqlSession4" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="dataSource" ref="dataSource4"/>
+    </bean>
+
+    <bean id="sqlSessionTemplate4" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg ref="sqlSession4"/>
+    </bean>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--    <bean id="sqlSessionTemplate2" class="org.mybatis.spring.SqlSessionTemplate">-->
+<!--        <constructor-arg ref="sqlSession"></constructor-arg>-->
+<!--    </bean>-->
+
+<!--    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource" />-->
+
+<!--    <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">-->
+<!--        <property name="driverClass" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>-->
+
+<!--        <property name="url" value="jdbc:sqlserver://10.10.11.6:1433;DatabaseName=project2"/>-->
+<!--        <property name="username" value="sa"/>-->
+<!--        <property name="password" value="krco#51304"/>-->
+
+<!--        &lt;!&ndash;-->
+<!--        <property name="url" value="jdbc:sqlserver://10.10.13.130:1433;DatabaseName=project2"/>-->
+<!--        <property name="username" value="sa"/>-->
+<!--        <property name="password" value="krco#51304"/>-->
+<!--		    &ndash;&gt;-->
+<!--    </bean>-->
+
+<!--    <bean id="sqlSessionFactory" class="kr.co.kr.common.RefreshableSqlSessionFactoryBean">-->
+<!--        <property name="dataSource" ref="dataSource" />-->
+<!--        <property name="configLocation" value="classpath:/kr/co/kr/mybatis/mybatis-config.xml" />-->
+<!--        <property name="mapperLocations" value="classpath:/kr/co/kr/mybatis/mapper/*.xml" />-->
+<!--    </bean>-->
+
+<!--    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">-->
+<!--        <constructor-arg index="0" ref="sqlSessionFactory" />-->
+<!--    </bean>-->
+
+
+<!--    &lt;!&ndash;  datasource2 &ndash;&gt;-->
+<!--    <bean id="dataSource2" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">-->
+<!--        <property name="driverClass" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>-->
+
+<!--        <property name="url" value="jdbc:sqlserver://10.10.11.6:1433;DatabaseName=contact"/>-->
+<!--        <property name="username" value="sa"/>-->
+<!--        <property name="password" value="krco#51304"/>-->
+
+<!--        &lt;!&ndash;-->
+<!--     <property name="url" value="jdbc:sqlserver://10.10.13.130:1433;DatabaseName=contact"/>-->
+<!--     <property name="username" value="sa"/>-->
+<!--     <property name="password" value="krco#51304"/>-->
+<!--     &ndash;&gt;-->
+<!--    </bean>-->
+
+<!--    <bean id="sqlSessionFactory2" class="kr.co.kr.common.RefreshableSqlSessionFactoryBean">-->
+<!--        <property name="dataSource" ref="dataSource2" />-->
+<!--        <property name="configLocation" value="classpath:/kr/co/kr/mybatis/mybatis-contact-config.xml" />-->
+<!--        <property name="mapperLocations" value="classpath:/kr/co/kr/mybatis/contact_mapper/*.xml" />-->
+<!--    </bean>-->
+
+<!--    <bean id="sqlSession2" class="org.mybatis.spring.SqlSessionTemplate">-->
+<!--        <constructor-arg index="0" ref="sqlSessionFactory2" />-->
+<!--    </bean>-->
+
+<!--    <bean id="transactionManager2" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource2" />-->
+
+<!--    &lt;!&ndash;  datasource3 &ndash;&gt;-->
+<!--    &lt;!&ndash;  [PDS업그레이드] &ndash;&gt;-->
+
+
+<!--    <bean id="dataSource3" class="org.apache.commons.dbcp.BasicDataSource">-->
+<!--        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>-->
+<!--        <property name="url" value="jdbc:mysql://10.10.11.69:3306/krc"></property>-->
+<!--        <property name="username" value="krc"></property>-->
+<!--        <property name="password" value="krc"></property>-->
+<!--    </bean>-->
+
+<!--    <bean id="sqlSessionFactory3" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+<!--        <property name="dataSource" ref="dataSource3"></property>-->
+<!--        <property name="configLocation" value="classpath:/kr/co/kr/mybatis/mybatis-config-pds.xml" />-->
+<!--        <property name="mapperLocations" value="classpath:/kr/co/kr/mybatis/pds_mapper/*.xml" />-->
+<!--    </bean>-->
+
+<!--    <bean id="sqlSession3" class="org.mybatis.spring.SqlSessionTemplate">-->
+<!--        <constructor-arg index="0" ref="sqlSessionFactory3" />-->
+<!--    </bean>-->
+
+<!--    <bean id="transactionManager3" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource3" />-->
+
+<!--    &lt;!&ndash;  datasource4 &ndash;&gt;-->
+<!--    <bean id="dataSource4" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">-->
+<!--        <property name="driverClass" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>-->
+<!--        <property name="url" value="jdbc:sqlserver://10.10.11.47:1433;DatabaseName=KResearch"/>-->
+<!--        <property name="username" value="krc"/>-->
+<!--        <property name="password" value="krc"/>-->
+<!--    </bean>-->
+
+<!--    <bean id="sqlSessionFactory4" class="kr.co.kr.common.RefreshableSqlSessionFactoryBean">-->
+<!--        <property name="dataSource" ref="dataSource4" />-->
+<!--        <property name="configLocation" value="classpath:/kr/co/kr/mybatis/o_mybatis-config-pds.xml" />-->
+<!--        <property name="mapperLocations" value="classpath:/kr/co/kr/mybatis/o_pds_mapper/*.xml" />-->
+<!--    </bean>-->
+
+<!--    <bean id="sqlSession4" class="org.mybatis.spring.SqlSessionTemplate">-->
+<!--        <constructor-arg index="0" ref="sqlSessionFactory4" />-->
+<!--    </bean>-->
+
+<!--    <bean id="transactionManager4" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource4" />-->
+
+</beans>

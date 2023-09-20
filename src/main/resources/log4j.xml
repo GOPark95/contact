@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<log4j:configuration>
+
+    <!-- Appenders -->
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <!--  기본설정 <param name="ConversionPattern" value="%-5p: %c - %m%n" /> -->
+            <!--  <param name="ConversionPattern" value="%-5p %c{1} - %m%n"/> -->
+            <param name="ConversionPattern" value="%d{yy-MM-dd HH:mm:ss.SSS} %5p %C [%M :%L] %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="dailyRollingFile" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="D:/WAS/logs/krc_module.log"/>
+        <param name="Append" value="true"/>
+        <param name="DatePattern" value="'-'yyyyMMdd'.log'"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <!-- <param name="ConversionPattern" value="%d %5p [%c:%L] %m%n" /> -->
+            <param name="ConversionPattern" value="%d{yy-MM-dd HH:mm:ss.SSS} %5p %C [%M :%L] %m%n"/>
+        </layout>
+    </appender>
+
+<!--    <appender name="db" class="kr.co.kr.common.MyPattern">-->
+<!--        <param name="driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>-->
+<!--        <param name="URL" value="jdbc:sqlserver://10.10.11.6:1433"/>-->
+<!--        <param name="user" value="sa"/>-->
+<!--        <param name="password" value="krco#51304"/>-->
+<!--        <param name="sql" value="INSERT INTO [project2].[dbo].[MAIL_LOGS](l_date, l_level, l_class, l_method , l_message)-->
+<!--			 VALUES (getdate() ,*%p*,*%C*,*[%M :%L]*,*%m*)"/>-->
+<!--    </appender>-->
+
+    <!-- Application Loggers -->
+    <!-- 기본설정
+    <logger name="kr.co.kr">
+        <level value="info" />
+    </logger>
+     -->
+    <logger name="kr.co.kr" additivity="true">
+        <level value="DEBUG"/>
+        <appender-ref ref="dailyRollingFile"/>
+    </logger>
+
+    <logger name="kr.co.kr.system.SystemController" additivity="true">
+        <level value="DEBUG"/>
+        <appender-ref ref="db"/>
+    </logger>
+
+    <!-- 3rdparty Loggers -->
+    <logger name="org.springframework.core">
+        <level value="info"/>
+    </logger>
+
+    <logger name="org.springframework.beans">
+        <level value="info"/>
+    </logger>
+
+    <logger name="org.springframework.context">
+        <level value="info"/>
+    </logger>
+
+    <logger name="org.springframework.web">
+        <level value="info"/>
+    </logger>
+
+    <!-- myBatis Logger -->
+    <logger name="jdbc.sqlonly" additivity="false">
+        <level value="info"/>
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="java.sql.Connection">
+        <level value="debug"/>
+    </logger>
+
+    <logger name="java.sql.Statement">
+        <level value="debug"/>
+    </logger>
+
+    <logger name="java.sql.PreparedStatement">
+        <level value="debug"/>
+    </logger>
+
+    <logger name="java.sql.ResultSet">
+        <level value="debug"/>
+    </logger>
+
+    <!-- Root Logger -->
+    <root>
+        <priority value="warn"/>
+        <appender-ref ref="console"/>
+    </root>
+
+</log4j:configuration>

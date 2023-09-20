@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="CurrentStatusMapper">
+    <resultMap id="DivisionStatus" type="DivisionStatusVo">
+        <result column="name" property="name"/>
+        <result column="header" property="header"/>
+        <result column="contact_stat" property="contactStat"/>
+        <result column="statCount" property="statCount"/>
+    </resultMap>
+
+    <resultMap id="ResultStatus" type="ResultStatusVo">
+        <result column="code" property="code"/>
+        <result column="name" property="name"/>
+        <result column="statCount" property="statCount"/>
+    </resultMap>
+
+    <resultMap id="MyunStatus" type="MyunStatusVo">
+        <result column="code" property="code"/>
+        <result column="name" property="name"/>
+        <result column="statCount" property="statCount"/>
+    </resultMap>
+
+    <resultMap id="CURRENTLIST" type="CurrentListDataVo">
+        <result column="list_id" property="list_id"/>
+        <result column="list_data" property="list_data"/>
+        <result column="list_type" property="list_type"/>
+        <result column="name" property="list_header"/>
+        <result column="list_order" property="list_order"/>
+        <result column="project_code" property="prj_code"/>
+        <result column="contact_stat" property="contact_stat"/>
+    </resultMap>
+
+    <resultMap id="ContactStautsExcel" type="ContactStatusVo">
+        <result column="list_data" property="list_info"/>
+        <result column="contact_result" property="contact_result"/>
+        <result column="contact_name" property="contact_name"/>
+        <result column="contact_time" property="contact_time"/>
+        <result column="content" property="contact_content"/>
+        <result column="contact_cnt" property="contact_cnt"/>
+    </resultMap>
+
+    <select id="GetDivisionStatus" resultMap="DivisionStatus">
+        SELECT A.name, A.header, C.contact_stat, COUNT(C.contact_stat) as statCount
+        FROM (
+             SELECT *
+             FROM DIVISION_CODE
+             WHERE project_code = #{prj_code}
+        ) A LEFT JOIN
+        (
+             SELECT *
+             FROM LIST
+             WHERE project_code = #{prj_code}
+             ) B ON A.name = B.list_type and A.header = B.list_data
+        LEFT JOIN (
+            SELECT *
+            FROM CONTACT_STATUS
+            WHERE project_code = #{prj_code}
+        ) C ON B.list_id = C.list_id
+        GROUP BY A.Dorder, A.code, A.name, A.header, C.contact_stat
+        ORDER BY A.Dorder, A.code
+    </select>
+
+    <select id="GetResultStatus" resultMap="ResultStatus">
+        SELECT A.code, A.name, count(B.contact_stat) as statCount
+        FROM (
+                SELECT *
+                FROM RESULT_CODE
+                WHERE project_code = #{prj_code}
+             ) A LEFT JOIN (
+                SELECT *
+                FROM CONTACT_STATUS
+                WHERE project_code = #{prj_code}
+                ) B ON A.code = B.contact_stat
+        GROUP BY A.id, A.code, A.name
+        ORDER BY A.id
+    </select>
+
+    <select id="GetMyunStatus" resultMap="MyunStatus">
+        SELECT CASE WHEN C.m_name IS NULL THEN D.p_name ELSE C.m_name END as name, B.result_code as code, count(*) as statCount
+        FROM (
+                SELECT *
+                FROM CONTACT_STATUS WITH(NOLOCK)
+                WHERE project_code = #{prj_code} and contact_time is not null
+             ) A
+             LEFT JOIN(
+                SELECT id, project_code, list_id, result_code, login_user
+                FROM CONTACT_RESULT_LOG crl WITH(NOLOCK)
+                WHERE id in ( SELECT max(id) as id
+                              FROM CONTACT_RESULT_LOG WITH(NOLOCK)
+                              GROUP BY project_code, list_id
+                        ) and project_code = #{prj_code}
+                ) B ON A.project_code = B.project_code AND A.list_id = B.list_id
+                     LEFT JOIN(
+                        SELECT *
+                        FROM [No.6].project2.dbo.man WITH(NOLOCK)
+                ) C ON B.login_user = CAST(C.new_id AS VARCHAR)
+                     LEFT JOIN(
+                        SELECT *
+                        FROM [No.6].project2.dbo.person WITH(NOLOCK)
+                ) D ON B.login_user = CAST(D.p_no AS VARCHAR)
+        GROUP BY B.result_code, C.m_name, D.p_name
+    </select>
+
+    <select id="SearchClickList" resultMap="CURRENTLIST">
+        SELECT L.*, CS.contact_stat
+        FROM LIST L WITH(NOLOCK)
+                     LEFT JOIN (
+                SELECT *
+                FROM CONTACT_STATUS
+                ) CS ON L.list_id = CS.list_id AND L.project_code = CS.project_code
+        WHERE L.project_code = #{prj_code}
+        AND L.list_id IN (
+                SELECT DISTINCT list_id
+                FROM LIST
+                WHERE project_code = #{prj_code}
+            )
+        AND CS.contact_stat = #{resultCode}
+        ORDER BY L.id
+    </select>
+
+    <select id="ContactStautsExcelDown" resultMap="ContactStautsExcel">
+        SELECT LTI.list_data, RC.name AS contact_result, CS.contact_name, CS.contact_time, CS.content, CRL.contact_cnt
+        FROM(
+            SELECT list_id, STRING_AGG(list_data, '||') AS list_data
+            FROM LIST WITH(NOLOCK)
+            WHERE project_code = #{prj_code}
+            GROUP BY list_id
+            ) LTI
+            LEFT JOIN (
+        SELECT TOP 1 A.list_id, A.contact_stat, A.contact_name, A.contact_time, B.content
+        FROM (
+                     SELECT *
+                     FROM CONTACT_STATUS WITH(NOLOCK)
+                     ) A LEFT JOIN (
+                SELECT *
+                FROM CONTACT_RESULT_LOG b WITH(NOLOCK)
+                ) B ON A.project_code = B.project_code AND A.list_id = B.list_id
+        WHERE A.project_code = #{prj_code} AND B.result_code NOT IN (0, 999) AND B.content NOT LIKE '%일괄%'
+        ORDER BY B.id DESC
+        ) CS ON LTI.list_id = CS.list_id
+            LEFT JOIN (
+        SELECT list_id, COUNT(*) AS contact_cnt
+        FROM CONTACT_RESULT_LOG b WITH(NOLOCK)
+        WHERE project_code = #{prj_code} AND result_code NOT IN (0, 999) AND content NOT LIKE '%일괄%'
+        GROUP BY list_id
+        ) CRL ON CS.list_id = CRL.list_id
+            LEFT JOIN (
+        SELECT *
+        FROM RESULT_CODE
+        WHERE project_code = #{prj_code}
+        ) RC ON CS.contact_stat = RC.code
+    </select>
+</mapper>

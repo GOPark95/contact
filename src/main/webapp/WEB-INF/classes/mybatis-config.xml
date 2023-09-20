@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+    <settings>
+        <setting name="jdbcTypeForNull" value="NULL" />
+    </settings>
+
+    <typeAliases>
+        <typeAlias type="kric.com.kric.user.model.vo.UserVo" alias="UserVo"/>
+        <typeAlias type="kric.com.kric.contact.model.vo.ContactProject" alias="ContactProject"/>
+        <typeAlias type="kric.com.kric.contact.model.vo.IntranetProjectListVo" alias="IntranetProjectListVo"/>
+        <typeAlias type="kric.com.kric.contact.model.vo.ContactTypeVo" alias="ContactTypeVo"/>
+        <typeAlias type="kric.com.kric.contact.model.vo.ResultCodeVo" alias="ResultCodeVo"/>
+        <typeAlias type="kric.com.kric.contact.model.vo.DivisionCodeVo" alias="DivisionCodeVo"/>
+        <typeAlias type="kric.com.kric.contact.model.vo.ListDataVo" alias="ListDataVo"/>
+        <typeAlias type="kric.com.kric.contact.model.vo.KonProjectVo" alias="KonProjectVo"/>
+        <typeAlias type="kric.com.kric.contact.model.vo.KonCodeVo" alias="KonCodeVo"/>
+        <typeAlias type="kric.com.kric.contact.model.vo.ContactModifyVo" alias="ContactModifyVo"/>
+        <typeAlias type="kric.com.kric.contact.model.vo.ResultLogVo" alias="ResultLogVo"/>
+        <typeAlias type="kric.com.kric.contact.model.vo.ContactGraphVo" alias="ContactGraphVo"/>
+        <typeAlias type="kric.com.kric.contact.model.vo.ClientVo" alias="ClientVo"/>
+        <typeAlias type="kric.com.kric.contact.model.vo.CallLogVo" alias="CallLogVo"/>
+        <typeAlias type="kric.com.kric.contact.model.vo.SendEmailLogVo" alias="SendEmailLogVo"/>
+        <typeAlias type="kric.com.kric.contact.model.vo.SendSmsLogVo" alias="SendSmsLogVo"/>
+        <typeAlias type="kric.com.kric.cms.model.vo.CMSSettingVo" alias="CMSSettingVo"/>
+        <typeAlias type="kric.com.kric.cms.model.vo.CMSTypeVo" alias="CMSTypeVo"/>
+        <typeAlias type="kric.com.kric.cms.model.vo.CMSInfoVo" alias="CMSInfoVo"/>
+        <typeAlias type="kric.com.kric.cms.model.vo.CMSVariableVo" alias="CMSVariableVo"/>
+        <typeAlias type="kric.com.kric.cms.model.vo.CMSFileVo" alias="CMSFileVo"/>
+        <typeAlias type="kric.com.kric.listManage.model.vo.CurrentListDataVo" alias="CurrentListDataVo"/>
+        <typeAlias type="kric.com.kric.listManage.model.vo.CurrentListTypeVo" alias="CurrentListTypeVo"/>
+        <typeAlias type="kric.com.kric.currentStatus.model.vo.DivisionStatusVo" alias="DivisionStatusVo"/>
+        <typeAlias type="kric.com.kric.currentStatus.model.vo.ResultStatusVo" alias="ResultStatusVo"/>
+        <typeAlias type="kric.com.kric.currentStatus.model.vo.MyunStatusVo" alias="MyunStatusVo"/>
+        <typeAlias type="kric.com.kric.currentStatus.model.vo.ContactStatusVo" alias="ContactStatusVo"/>
+    </typeAliases>
+
+    <mappers>
+        <mapper resource="mappers/User-Mapper.xml" />
+        <mapper resource="mappers/Contact-Mapper.xml" />
+        <mapper resource="mappers/CMS-Mapper.xml" />
+        <mapper resource="mappers/ListManage-Mapper.xml" />
+        <mapper resource="mappers/CurrentStatus-Mapper.xml" />
+    </mappers>
+</configuration>

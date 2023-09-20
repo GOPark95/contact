@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebContextManager">
+    <option name="state">
+      <map>
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/contact_project/contactList.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/contact_project" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/insert/contactInsert.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/insert" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/index.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
+      </map>
+    </option>
+  </component>
+</project>

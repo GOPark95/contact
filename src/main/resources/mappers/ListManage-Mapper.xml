@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ListManageMapper">
+
+    <resultMap id="CURRENTLIST" type="CurrentListDataVo">
+        <result column="list_id" property="list_id"/>
+        <result column="list_data" property="list_data"/>
+        <result column="list_type" property="list_type"/>
+        <result column="name" property="list_header"/>
+        <result column="list_order" property="list_order"/>
+        <result column="project_code" property="prj_code"/>
+        <result column="contact_stat" property="contact_stat"/>
+    </resultMap>
+
+    <resultMap id="CURRENTLIST_TYPE" type="CurrentListTypeVo">
+        <result column="name" property="header"/>
+        <result column="type" property="type"/>
+        <result column="list_order" property="order"/>
+    </resultMap>
+
+    <select id="GET_CURRENT_LIST" resultMap="CURRENTLIST">
+        SELECT *
+        FROM LIST WITH(NOLOCK)
+        WHERE project_code = #{prj_code}
+        ORDER BY id
+    </select>
+
+    <select id="GET_CURRENT_LIST_TYPE" resultMap="CURRENTLIST_TYPE">
+        select *
+        FROM LIST_TYPE_IX WITH(NOLOCK)
+        WHERE project_code = #{prj_code}
+        ORDER BY list_order
+    </select>
+
+    <insert id="ContactListStatusAdd">
+        INSERT Contact.dbo.CONTACT_STATUS(list_id, contact_stat, project_code) VALUES
+
+        <foreach collection="listIdArr" item="item" separator=" , " >
+            (#{item}, 0, #{pcode})
+        </foreach>
+    </insert>
+
+    <insert id="ContactListAdd">
+        INSERT Contact.dbo.LIST(list_id, list_data, list_type, list_order, project_code) VALUES
+
+        <foreach collection="list" item="item" separator=" , " >
+            (#{item.list_id}, #{item.list_data}, #{item.list_type}, #{item.list_order}, #{item.prj_code})
+        </foreach>
+    </insert>
+
+    <delete id="ContactListStatusDelete">
+        DELETE FROM CONTACT_STATUS WHERE project_code = #{prj_code}
+        DELETE FROM LIST WHERE project_code = #{prj_code}
+    </delete>
+
+    <insert id="ContactListChange">
+        INSERT Contact.dbo.LIST(list_id, list_data, list_type, list_order, project_code) VALUES
+
+        <foreach collection="list" item="item" separator=" , " >
+            (#{item.list_id}, #{item.list_data}, #{item.list_type}, #{item.list_order}, #{item.prj_code})
+        </foreach>
+    </insert>
+
+    <insert id="ContactStatusChange">
+        INSERT Contact.dbo.CONTACT_STATUS(list_id, contact_stat, project_code) VALUES
+
+        <foreach collection="listIdArr" item="item" separator=" , " >
+            (#{item}, 0, #{prj_code})
+        </foreach>
+    </insert>
+
+    <select id="SearchList" resultMap="CURRENTLIST">
+        SELECT L.*, CS.contact_stat
+        FROM LIST L WITH(NOLOCK)
+                     LEFT JOIN (
+                SELECT *
+                FROM CONTACT_STATUS
+                ) CS ON L.list_id = CS.list_id AND L.project_code = CS.project_code
+        WHERE L.project_code = #{prj_code}
+          AND L.list_id IN (
+                SELECT DISTINCT list_id
+                FROM LIST
+                WHERE project_code = #{prj_code} AND list_type = #{searchOption} AND list_data like '%' + #{searchText} + '%'
+                )
+        ORDER BY L.id
+    </select>
+</mapper>

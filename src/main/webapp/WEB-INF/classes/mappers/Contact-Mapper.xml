@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="contactMapper">
+
+    <resultMap id="ContactProjectResult" type="ContactProject">
+        <result column="code" property="code"/>
+        <result column="name" property="name"/>
+        <result column="intranet_link" property="intranet_code"/>
+        <result column="p_subject" property="intranet_name"/>
+        <result column="kon_link" property="kon_code"/>
+        <result column="title" property="kon_name"/>
+    </resultMap>
+
+    <resultMap id="ContactType" type="ContactTypeVo">
+        <result column="name" property="header"/>
+        <result column="type" property="type"/>
+        <result column="division_status" property="division_status"/>
+    </resultMap>
+
+    <resultMap id="ContactResult" type="ResultCodeVo">
+        <result column="code" property="rcode"/>
+        <result column="name" property="rname"/>
+    </resultMap>
+
+    <resultMap id="ContactDivision" type="DivisionCodeVo">
+        <result column="Dorder" property="dorder"/>
+        <result column="code" property="dcode"/>
+        <result column="name" property="dname"/>
+        <result column="header" property="dheader"/>
+    </resultMap>
+
+    <resultMap id="ContactListData" type="ListDataVo">
+        <result column="list_id" property="list_id"/>
+        <result column="list_data" property="list_data"/>
+        <result column="list_type" property="list_type"/>
+        <result column="name" property="list_header"/>
+        <result column="list_order" property="list_order"/>
+        <result column="project_code" property="prj_code"/>
+    </resultMap>
+
+    <resultMap id="KonResult" type="KonProjectVo">
+        <result column="pkey" property="pkey"/>
+        <result column="title" property="title"/>
+    </resultMap>
+
+    <resultMap id="KonLinkCode" type="KonCodeVo">
+        <result column="type_code" property="code"/>
+        <result column="project_code" property="prj_code"/>
+    </resultMap>
+
+    <resultMap id="ContactListModifyLog" type="ContactModifyVo">
+        <result column="list_type" property="list_type"/>
+        <result column="before_data" property="before_data"/>
+        <result column="after_data" property="after_data"/>
+        <result column="modify_date" property="modify_date"/>
+    </resultMap>
+
+    <resultMap id="ContactListResultLog" type="ResultLogVo">
+        <result column="name" property="name"/>
+        <result column="resultCode" property="resultCode"/>
+        <result column="content" property="content"/>
+        <result column="result_date" property="result_date"/>
+    </resultMap>
+
+    <resultMap id="ContactGraph" type="ContactGraphVo">
+        <result column="name" property="name"/>
+        <result column="cnt" property="count"/>
+    </resultMap>
+
+    <resultMap id="ClientInfo" type="ClientVo">
+        <result column="client_id" property="client_id"/>
+        <result column="internal_no" property="internal_no"/>
+        <result column="external_no" property="external_no"/>
+    </resultMap>
+
+    <resultMap id="CallLog" type="CallLogVo">
+        <result column="name" property="name"/>
+        <result column="callNumber" property="callNumber"/>
+        <result column="callTime" property="callTime"/>
+        <result column="call_date" property="call_date"/>
+    </resultMap>
+
+    <resultMap id="SendEmailLog" type="SendEmailLogVo">
+        <result column="name" property="name"/>
+        <result column="sender" property="sender"/>
+        <result column="receiver" property="receiver"/>
+        <result column="send_date" property="send_date"/>
+    </resultMap>
+
+    <resultMap id="SendSmsLog" type="SendSmsLogVo">
+        <result column="name" property="name"/>
+        <result column="sender" property="sender"/>
+        <result column="receiver" property="receiver"/>
+        <result column="send_date" property="send_date"/>
+    </resultMap>
+
+    <select id="contactList" resultMap="ContactProjectResult">
+
+        select cl.*, tpm.p_subject, json_value(kp.PROJECTJSON, '$.must.title') as title
+        from Contact.dbo.CONTACT_PROJECT cl WITH(NOLOCK)
+                     LEFT join [NO.6].project2.dbo.T_PROJECT_METHOD tpm ON (cl.intranet_link = tpm.p_child_sn)
+                     LEFT join Kon.dbo.PROJECT kp ON (cl.kon_link = kp.PKEY)
+        where cl.project_end_yn = 'N'
+        <if test="code != null and code !='' ">
+            AND code = #{code}
+        </if>
+        <if test="name != null and name !=''">
+            AND name like '%' + #{name} + '%'
+        </if>
+        order by code desc;
+
+<!--        select cl.*, '' as p_subject, '' as title-->
+<!--        from Contact.dbo.CONTACT_PROJECT cl-->
+<!--        where cl.project_end_yn = 'N'-->
+<!--        <if test="code != null and code !='' ">-->
+<!--            AND code = #{code}-->
+<!--        </if>-->
+<!--        <if test="name != null and name !=''">-->
+<!--            AND name like '%' + #{name} + '%'-->
+<!--        </if>-->
+<!--        order by code desc;-->
+    </select>
+
+    <select id="IntranetList" resultType="IntranetProjectListVo">
+        SELECT	A.P_SN, A.p_child_sn, A.p_subject, p_method_nm, A.p_research_complete, p_dp_complete,A.p_field_complete
+        FROM 	project2.dbo.T_PROJECT_METHOD as A WITH(NOLOCK)
+        LEFT OUTER JOIN project2.dbo.T_PROJECT_METHOD_CD as B WITH(NOLOCK)
+        ON		A.p_method_cd = B.p_method_cd
+        LEFT OUTER JOIN contact.dbo.kikoan_list KL WITH(NOLOCK)
+        ON		A.p_child_sn = KL.intranet_project
+        WHERE	(p_progress_status >= '006')
+        AND	(A.p_research_complete IS NULL OR A.p_field_complete IS NULL OR A.p_dp_complete IS NULL)
+        AND   (KL.intranet_project = '' OR KL.intranet_project IS NULL)
+        <if test="inputVal != ''">
+            AND   ( (A.p_subject like '%'+#{inputVal}+'%') or (A.p_child_sn like '%'+#{inputVal}+'%') )
+        </if>
+        ORDER BY A.p_sn desc
+    </select>
+
+    <insert id="ContactInsert">
+        INSERT Contact.dbo.CONTACT_PROJECT(name, intranet_link, kon_link, project_end_yn, create_date) VALUES (#{name}, #{intranet_code}, #{kon_code}, 'N', GETDATE())
+    </insert>
+
+    <select id="ContactListCount" resultType="_int">
+        SELECT COUNT(*) FROM Contact.dbo.CONTACT_PROJECT WITH(NOLOCK)
+        <where>
+            <if test="code != null and code !='' ">
+                AND code = #{code}
+            </if>
+            <if test="name != null and name !=''">
+                AND name like '%' + #{name} + '%'
+            </if>
+        </where>
+    </select>
+
+    <insert id="ContactInsert_ResultCode">
+        <selectKey keyProperty="pcode" resultType="_int" order="BEFORE">
+            select Max(code) from Contact.dbo.CONTACT_PROJECT
+        </selectKey>
+
+        INSERT Contact.dbo.RESULT_CODE(code, name, project_code) VALUES
+
+        <foreach collection="list" item="item" separator=" , " >
+             (#{item.rcode}, #{item.rname}, #{pcode})
+        </foreach>
+    </insert>
+
+    <insert id="ContactInsert_DivisionCode">
+        <selectKey keyProperty="pcode" resultType="_int" order="BEFORE">
+            select Max(code) from Contact.dbo.CONTACT_PROJECT
+        </selectKey>
+
+        INSERT Contact.dbo.DIVISION_CODE(Dorder, code, name, header, project_code) VALUES
+
+        <foreach collection="list" item="item" separator=" , " >
+            (#{item.dorder}, #{item.dcode}, #{item.dname}, #{item.dheader}, #{pcode})
+        </foreach>
+    </insert>
+
+    <insert id="ContactInsert_ContactList">
+        <selectKey keyProperty="pcode" resultType="_int" order="BEFORE">
+            select Max(code) from Contact.dbo.CONTACT_PROJECT
+        </selectKey>
+
+        INSERT Contact.dbo.LIST(list_id, list_data, list_type, list_order, project_code) VALUES
+
+        <foreach collection="list" item="item" separator=" , " >
+            (#{item.list_id}, #{item.list_data}, #{item.list_type}, #{item.list_order}, #{pcode})
+        </foreach>
+    </insert>
+
+    <insert id="ContactInsert_ContactType">
+        <selectKey keyProperty="pcode" resultType="_int" order="BEFORE">
+            select Max(code) from Contact.dbo.CONTACT_PROJECT
+        </selectKey>
+
+        INSERT Contact.dbo.LIST_TYPE_IX(name, type, division_status, list_order, project_code) VALUES
+
+        <foreach collection="list" item="item" separator=" , " >
+            (#{item.header}, #{item.type}, #{item.division_status}, #{item.order}, #{pcode})
+        </foreach>
+    </insert>
+
+    <select id="GetContactType" resultMap="ContactType">
+        select name, [type], division_status from LIST_TYPE_IX WITH(NOLOCK) where project_code = #{pcode} order by id;
+    </select>
+
+    <select id="GetContactResult" resultMap="ContactResult">
+        select code, name from RESULT_CODE WITH(NOLOCK) where project_code = #{pcode} order by id;
+    </select>
+
+    <select id="GetContactDivision" resultMap="ContactDivision">
+        select Dorder, code, name, header from DIVISION_CODE WITH(NOLOCK)  where project_code = #{pcode} order by id;
+    </select>
+
+    <delete id="Delete_ResultCode">
+        delete from RESULT_CODE where project_code = #{pcode}
+    </delete>
+
+    <insert id="Modify_ResultCode">
+        INSERT Contact.dbo.RESULT_CODE(code, name, project_code) VALUES
+
+        <foreach collection="list" item="item" separator=" , " >
+            (#{item.rcode}, #{item.rname}, #{item.prj_code})
+        </foreach>
+    </insert>
+
+    <select id="GetList" resultMap="ContactListData">
+        select * from Contact.dbo.LIST WITH(NOLOCK) where project_code = #{pcode} order by id;
+    </select>
+    
+    <delete id="Delete_DivisionCode">
+        delete from DIVISION_CODE where project_code = #{pcode};
+        delete from LIST_TYPE_IX where project_code = #{pcode};
+        delete from LIST where project_code = #{pcode};
+        delete from CONTACT_STATUS where project_code = #{pcode};
+    </delete>
+
+    <insert id="Modify_ListData">
+        INSERT Contact.dbo.LIST(list_id, list_data, list_type, list_order, project_code) VALUES
+
+        <foreach collection="list" item="item" separator=" , " >
+            (#{item.list_id}, #{item.list_data}, #{item.list_type}, #{item.list_order}, #{item.prj_code})
+        </foreach>
+    </insert>
+
+    <insert id="Modify_ListType">
+        INSERT Contact.dbo.LIST_TYPE_IX(name, type, division_status, list_order, project_code) VALUES
+
+        <foreach collection="list" item="item" separator=" , " >
+            (#{item.header}, #{item.type}, #{item.division_status}, #{item.order}, #{item.prj_code})
+        </foreach>
+    </insert>
+
+    <insert id="Modify_Division">
+        INSERT Contact.dbo.DIVISION_CODE(Dorder, code, name, header, project_code) VALUES
+
+        <foreach collection="list" item="item" separator=" , " >
+            (#{item.dorder}, #{item.dcode}, #{item.dname}, #{item.dheader}, #{item.prj_code})
+        </foreach>
+    </insert>
+
+    <insert id="Modify_ContactStatus">
+        INSERT Contact.dbo.CONTACT_STATUS(list_id, contact_stat, project_code) VALUES
+
+        <foreach collection="listid_arr" item="item" separator=" , " >
+            (#{item}, 0, #{pcode})
+        </foreach>
+    </insert>
+
+    <insert id="ContactInsert_ContactStatus">
+        <selectKey keyProperty="pcode" resultType="_int" order="BEFORE">
+            select Max(code) from Contact.dbo.CONTACT_PROJECT
+        </selectKey>
+
+        INSERT Contact.dbo.CONTACT_STATUS(list_id, contact_stat, project_code) VALUES
+
+        <foreach collection="list" item="item" separator=" , " >
+            (#{item}, 0, #{pcode})
+        </foreach>
+    </insert>
+
+    <insert id="ContactProjectLog">
+        <selectKey keyProperty="pcode" resultType="_int" order="BEFORE">
+            select Max(code) from Contact.dbo.CONTACT_PROJECT
+        </selectKey>
+
+        INSERT Contact.dbo.PROJECT_LOG(project_code, loginUser_name, loginUser_email, description, create_time)
+        VALUES (#{pcode}, #{loginUser.p_no}, #{loginUser.p_email}, #{description}, GETDATE())
+
+    </insert>
+
+    <select id="KonList" resultMap="KonResult">
+        select PKEY, json_value(PROJECTJSON, '$.must.title') as title from Kon.dbo.PROJECT WITH(NOLOCK) where PKEY like '%' + #{inputVal} + '%' or json_value(PROJECTJSON, '$.must.title') like '%' + #{inputVal} + '%'
+    </select>
+
+    <update id="ModifyProjectInfo">
+        update Contact.dbo.CONTACT_PROJECT set name = #{name}, intranet_link = #{intranet_code} where code = #{code}
+    </update>
+
+    <insert id="ContactInsert_KonType">
+        <selectKey keyProperty="pcode" resultType="_int" order="BEFORE">
+            select Max(code) from Contact.dbo.CONTACT_PROJECT
+        </selectKey>
+
+        INSERT Contact.dbo.KON_LINK_TYPE(type_code, project_code) VALUES
+
+        <foreach collection="list" item="item" separator=" , " >
+            (#{item}, #{pcode})
+        </foreach>
+    </insert>
+
+    <select id="ContactLastCode" resultType="string">
+        select Max(code) from CONTACT_PROJECT
+    </select>
+
+    <select id="GetContactKonCode" resultMap="KonLinkCode">
+        select * from KON_LINK_TYPE WITH(NOLOCK) where project_code = #{pcode} order by id
+    </select>
+
+    <update id="Modify_KonCode">
+        UPDATE CONTACT_PROJECT SET kon_link = #{konCode} where code = #{pcode}
+    </update>
+
+    <delete id="Delete_KonLinkCode">
+        delete from KON_LINK_TYPE where project_code = #{pcode};
+    </delete>
+
+    <insert id="Modify_KonLinkCode">
+        INSERT Contact.dbo.KON_LINK_TYPE(type_code, project_code) VALUES
+
+        <foreach collection="konType" item="item" separator=" , " >
+            (#{item}, #{pcode})
+        </foreach>
+    </insert>
+
+    <select id="GetDivisionCode" resultMap="ContactDivision">
+        select * from DIVISION_CODE WITH(NOLOCK) where project_code = #{pcode}
+    </select>
+
+    <select id="GetListInfo" resultMap="ContactListData">
+        SELECT l.list_id, l.list_data, lti.type as list_type, l.list_type as name, l.list_order, l.project_code
+        FROM Contact.dbo.LIST l WITH(NOLOCK)
+        JOIN Contact.dbo.LIST_TYPE_IX lti WITH(NOLOCK) ON (l.project_code = lti.project_code AND l.list_type = lti.name AND l.list_order = lti.list_order)
+        WHERE l.list_id = #{list_id} AND l.project_code = #{prj_code}
+    </select>
+
+    <select id="GetRandomList" resultType="string">
+        SELECT TOP 1 list_id
+        FROM (
+             SELECT
+                  list_id
+                  <foreach collection="dlist" item="item">
+                      , MAX(CASE WHEN list_type = #{item.dheader} THEN list_data END) as ${item.dcode}
+                  </foreach>
+             FROM (
+                    SELECT LI.list_id, LTI.name AS list_type, LI.list_data, LI.project_code
+                    FROM LIST LI WITH(NOLOCK)
+                    LEFT JOIN (
+                    SELECT *
+                    FROM LIST_TYPE_IX WITH(NOLOCK)
+                    ) LTI ON (LI.project_code = LTI.project_code AND LI.list_type = LTI.name AND LI.list_order = LTI.list_order)
+                    WHERE LI.project_code = #{prjCode} AND LI.list_id  in (SELECT list_id
+                                                                     FROM CONTACT_STATUS cs WITH(NOLOCK)
+                                                                     WHERE project_code = #{prjCode} AND contact_stat = '0'
+                                                                    )
+             ) L
+             GROUP BY list_id
+        ) GL
+        <where>
+            <foreach collection="dlist" item="item" index="index">
+                AND ${item.dcode} = #{item.dname}
+            </foreach>
+        </where>
+        ORDER BY newid();
+    </select>
+    
+    <update id="ContactListModify">
+        <foreach collection="dlist" item="item">
+            UPDATE LIST
+            SET list_data = #{item.after_data}
+            WHERE Contact.dbo.LIST.list_id = #{listId} AND project_code = #{prjCode} AND list_data = #{item.before_data} AND list_order = #{item.list_order}
+        </foreach>
+    </update>
+
+    <insert id="ContactListModify_LOG">
+            INSERT INTO Contact.dbo.CONTACT_MODIFY_LOG VALUES
+
+            <foreach collection="dlist" item="item" separator=" , " >
+                (#{listId}, #{loginUser.p_no}, #{item.list_type}, #{item.before_data}, #{item.after_data}, GETDATE(), #{prjCode})
+            </foreach>
+    </insert>
+
+    <select id="GetContactModifyList" resultMap="ContactListModifyLog">
+        SELECT list_type, before_data, after_data, FORMAT(modify_date , 'yyyy-MM-dd tt hh:mm:ss') as modify_date
+        FROM Contact.dbo.CONTACT_MODIFY_LOG WITH(NOLOCK)
+        WHERE list_id = #{list_id} AND project_code = #{prj_code}
+        ORDER BY id DESC
+    </select>
+
+    <insert id="ContactResult_Add_LOG">
+        INSERT INTO Contact.dbo.CONTACT_RESULT_LOG VALUES(#{listId}, #{loginUser.p_no}, #{result_code}, #{content}, GETDATE(), #{prjCode})
+    </insert>
+
+    <update id="ContactResult_Add">
+        UPDATE Contact.dbo.CONTACT_STATUS SET contact_stat = #{result_code}, contact_name = #{loginUser.p_no}, contact_time = GETDATE() WHERE list_id = #{listId} AND project_code = #{prjCode}
+    </update>
+
+    <select id="GetContactResultList" resultType="ResultLogVo">
+        SELECT CL.id, LU.p_name as name, RC.name as resultCode, CL.content as content, FORMAT(CL.result_date , 'yyyy-MM-dd tt hh:mm:ss') as result_date
+        FROM Contact.dbo.CONTACT_RESULT_LOG CL WITH(NOLOCK)
+        LEFT JOIN (
+                SELECT *
+                FROM Contact.dbo.RESULT_CODE WITH(NOLOCK)
+                WHERE project_code = #{ld.prj_code}
+        ) RC ON CL.project_code = RC.project_code AND CL.result_code = RC.code
+            LEFT JOIN(
+            SELECT *
+            FROM [No.6].project2.dbo.person WITH(NOLOCK)
+            ) LU ON CL.login_user = LU.p_no
+        WHERE CL.list_id = #{ld.list_id} AND CL.project_code = #{ld.prj_code} AND CL.login_user not like '%-%' AND CL.result_code != 999
+        UNION ALL
+        SELECT CL.id, LU.m_name as name, RC.name as resultCode, CL.content as content, FORMAT(CL.result_date , 'yyyy-MM-dd tt hh:mm:ss') as result_date
+        FROM Contact.dbo.CONTACT_RESULT_LOG CL WITH(NOLOCK)
+                     LEFT JOIN (
+                SELECT *
+                FROM Contact.dbo.RESULT_CODE WITH(NOLOCK)
+                WHERE project_code = #{ld.prj_code}
+                ) RC ON CL.project_code = RC.project_code AND CL.result_code = RC.code
+                     LEFT JOIN(
+                SELECT *
+                FROM [No.6].project2.dbo.man WITH(NOLOCK)
+                ) LU ON CL.login_user = LU.new_id
+        WHERE CL.list_id = #{ld.list_id} AND CL.project_code = #{ld.prj_code} AND CL.login_user like '%-%' AND CL.result_code != 999
+        ORDER BY id DESC;
+    </select>
+
+    <select id="Get_ChartData" resultMap="ContactGraph">
+        <choose>
+            <when test='!loginUser.p_type.equals("관리자")'>
+                SELECT A.day7 AS name, COUNT(CASE WHEN B.day0 IS NOT NULL THEN 1 END) AS cnt
+                FROM(
+                    SELECT CONVERT(VARCHAR, DATEADD(D, NUMBER, FORMAT(dateadd(day,-6,getdate()), 'yyyy-MM-dd')), 23) AS day7
+                    FROM MASTER..SPT_VALUES MD WITH(NOLOCK)
+                    <![CDATA[
+                        WHERE TYPE = 'P' AND NUMBER <= DATEDIFF(D, FORMAT(dateadd(day,-6,getdate()), 'yyyy-MM-dd'), FORMAT(getdate(), 'yyyy-MM-dd'))
+                    ]]>
+                )A LEFT JOIN(
+                    SELECT FORMAT(contact_time, 'yyyy-MM-dd') AS day0
+                    FROM (
+                        SELECT *
+                        FROM CONTACT_STATUS WITH(NOLOCK)
+                        WHERE project_code = #{prjCode} AND contact_stat != 0
+                    ) AA
+                    LEFT JOIN(
+                        SELECT id, project_code, list_id, login_user
+                        FROM CONTACT_RESULT_LOG crl WITH(NOLOCK)
+                        WHERE id IN ( SELECT max(id) AS id
+                                      FROM CONTACT_RESULT_LOG WITH(NOLOCK)
+                                      WHERE result_code != 999
+                                      GROUP BY project_code, list_id
+                                    )
+                    ) AB ON AA.project_code = AB.project_code AND AA.list_id = AB.list_id
+                    WHERE login_user = #{loginUser.p_no}
+                )B ON A.day7 = B.day0
+                GROUP BY A.day7
+            </when>
+            <otherwise>
+                SELECT A.day7 AS name, COUNT(CASE WHEN B.day0 IS NOT NULL THEN 1 END) AS cnt
+                FROM(
+                    SELECT CONVERT(VARCHAR, DATEADD(D, NUMBER, FORMAT(dateadd(day,-6,getdate()), 'yyyy-MM-dd')), 23) AS day7
+                    FROM MASTER..SPT_VALUES MD WITH(NOLOCK)
+                    <![CDATA[
+                        WHERE TYPE = 'P' AND NUMBER <= DATEDIFF(D, FORMAT(dateadd(day,-6,getdate()), 'yyyy-MM-dd'), FORMAT(getdate(), 'yyyy-MM-dd'))
+                    ]]>
+                )A LEFT JOIN(
+                    SELECT FORMAT(contact_time, 'yyyy-MM-dd') as day0
+                    FROM Contact.dbo.CONTACT_STATUS WITH(NOLOCK)
+                    WHERE project_code = #{prjCode}
+                )B ON A.day7 = B.day0
+                GROUP BY A.day7
+            </otherwise>
+        </choose>
+        SELECT A.day7 AS name, COUNT(CASE WHEN B.day0 IS NOT NULL THEN 1 END) AS cnt
+        FROM(
+            SELECT CONVERT(VARCHAR, DATEADD(D, NUMBER, FORMAT(dateadd(day,-6,getdate()), 'yyyy-MM-dd')), 23) AS day7
+            FROM MASTER..SPT_VALUES MD WITH(NOLOCK)
+            <![CDATA[
+            WHERE TYPE = 'P' AND NUMBER <= DATEDIFF(D, FORMAT(dateadd(day,-6,getdate()), 'yyyy-MM-dd'), FORMAT(getdate(), 'yyyy-MM-dd'))
+            ]]>
+        )A LEFT JOIN(
+            SELECT FORMAT(contact_time, 'yyyy-MM-dd') as day0
+            FROM Contact.dbo.CONTACT_STATUS WITH(NOLOCK)
+            WHERE project_code = #{prjCode}
+        )B ON A.day7 = B.day0
+        GROUP BY A.day7
+    </select>
+
+    <select id="Get_ChartData2" resultMap="ContactGraph">
+        SELECT B.name AS name, count(*) as cnt
+        FROM (
+            SELECT *
+            FROM Contact.dbo.CONTACT_STATUS WITH(NOLOCK)
+            WHERE project_code = #{prjCode} AND contact_stat != 999
+        ) A LEFT JOIN (
+            SELECT *
+            FROM RESULT_CODE WITH(NOLOCK)
+            WHERE project_code = #{prjCode}
+        ) B ON A.contact_stat = B.code
+        GROUP BY B.name, B.code
+        ORDER BY B.code
+    </select>
+
+    <select id="Get_ChartData3" resultMap="ContactGraph">
+        <choose>
+            <when test='loginUser.p_type.equals("관리자")'>
+                SELECT CASE WHEN C.m_name IS NULL THEN D.p_name ELSE C.m_name END AS name, count(*) as cnt
+                FROM (
+                    SELECT *
+                    FROM CONTACT_STATUS WITH(NOLOCK)
+                    WHERE project_code = #{prjCode} and contact_stat not in (0, 999)
+                ) A
+                LEFT JOIN(
+                    SELECT id, project_code, list_id, login_user
+                    FROM CONTACT_RESULT_LOG crl WITH(NOLOCK)
+                    WHERE id in ( SELECT max(id) as id
+                                  FROM CONTACT_RESULT_LOG WITH(NOLOCK)
+                                  WHERE result_code != 999
+                                  GROUP BY project_code, list_id
+                                )
+                ) B ON A.project_code = B.project_code AND A.list_id = B.list_id
+                LEFT JOIN(
+                    SELECT *
+                    FROM [No.6].project2.dbo.man WITH(NOLOCK)
+                ) C ON B.login_user = CAST(C.new_id AS VARCHAR)
+                LEFT JOIN(
+                    SELECT *
+                    FROM [No.6].project2.dbo.person WITH(NOLOCK)
+                ) D ON B.login_user = CAST(D.p_no AS VARCHAR)
+                GROUP BY C.m_name, D.p_name
+            </when>
+            <otherwise>
+                SELECT C.name, count(*) as cnt
+                FROM (
+                    SELECT *
+                    FROM CONTACT_STATUS WITH(NOLOCK)
+                    WHERE project_code = #{prjCode} and contact_stat != 0
+                ) A
+                LEFT JOIN(
+                    SELECT id, project_code, list_id, login_user
+                    FROM CONTACT_RESULT_LOG crl WITH(NOLOCK)
+                    WHERE id in ( SELECT max(id) as id
+                                  FROM CONTACT_RESULT_LOG WITH(NOLOCK)
+                                  WHERE result_code != 999
+                                  GROUP BY project_code, list_id
+                    )
+                ) B ON A.project_code = B.project_code AND A.list_id = B.list_id
+                LEFT JOIN (
+                    SELECT *
+                    FROM RESULT_CODE WITH(NOLOCK)
+                    WHERE project_code = #{prjCode}
+                ) C ON A.contact_stat = C.code
+                WHERE B.login_user = #{loginUser.p_no}
+                GROUP BY C.name, C.code
+                ORDER BY C.code;
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="GetClientInfo" resultMap="ClientInfo">
+        SELECT *
+        FROM [No.6].new_cati.dbo.client WITH(NOLOCK)
+        WHERE client_ip =  #{ip}
+    </select>
+
+    <insert id="Calling_Log">
+        INSERT INTO Contact.dbo.CONTACT_CALL_LOG VALUES (#{list_id}, #{loginUser.p_no}, #{callNumber}, #{end_time}, #{start_time}, GETDATE(), #{prj_code})
+    </insert>
+
+    <select id="GetCallLog" resultMap="CallLog">
+        SELECT B.p_name as name,
+               A.call_number as callNumber,
+               A.calling_time as callTime,
+               FORMAT(A.start_time , 'yyyy-MM-dd tt hh:mm:ss') as call_date
+        FROM CONTACT_CALL_LOG A WITH(NOLOCK)
+                     LEFT JOIN(
+                SELECT cast(p_no as varchar) as p_no,
+                       p_name,
+                       p_pass_new as p_pass,
+                       '서울'   as p_area,
+                       '관리자' as p_type,
+                       p_user_mail as p_email,
+                       p_tel3  as p_tel
+                FROM  [NO.6].project2.dbo.person WITH(NOLOCK)
+                WHERE p_resign = '0'
+                UNION ALL
+                SELECT p_no,
+                       p_name,
+                       p_pass,
+                       p_area,
+                       p_type,
+                       p_mail,
+                       p_tel
+                FROM
+                        (
+                                SELECT new_id as p_no,
+                                       m_name as p_name,
+                                       LEFT(m_jumin, 6) as p_pass,
+                                       '' as p_area,
+                                       '컨택원' as p_type,
+                                       ''  as p_mail,
+                                       m_mobile as p_tel
+                                FROM [NO.6].project2.dbo.man WITH(NOLOCK)
+                                ) as cuser
+                ) B ON A.login_user = B.p_no
+        WHERE A.project_code = #{prj_code} and A.list_id = #{list_id}
+        ORDER BY A.id DESC
+    </select>
+
+    <insert id="SendEmailLog">
+        INSERT INTO CONTACT_EMAIL_LOG VALUES(#{listId}, #{loginUser.p_no}, #{email.sender}, #{email.receiver}, #{email.content}, GETDATE(), #{prjCode})
+    </insert>
+
+    <select id="GetEmailLog" resultMap="SendEmailLog">
+        SELECT B.p_name as name,
+               A.receiver as receiver,
+               A.sender as sender,
+               FORMAT(A.send_date, 'yyyy-MM-dd tt hh:mm:ss') as send_date
+        FROM CONTACT_EMAIL_LOG A WITH(NOLOCK)
+                     LEFT JOIN(
+                SELECT cast(p_no as varchar) as p_no,
+                       p_name,
+                       p_pass_new as p_pass,
+                       '서울'   as p_area,
+                       '관리자' as p_type,
+                       p_user_mail as p_email,
+                       p_tel3  as p_tel
+                FROM  [NO.6].project2.dbo.person WITH(NOLOCK)
+                WHERE p_resign = '0'
+                UNION ALL
+                SELECT p_no,
+                       p_name,
+                       p_pass,
+                       p_area,
+                       p_type,
+                       p_mail,
+                       p_tel
+                FROM
+                        (
+                                SELECT new_id as p_no,
+                                       m_name as p_name,
+                                       LEFT(m_jumin, 6) as p_pass,
+                                       '' as p_area,
+                                       '컨택원' as p_type,
+                                       ''  as p_mail,
+                                       m_mobile as p_tel
+                                FROM [NO.6].project2.dbo.man WITH(NOLOCK)
+                                ) as cuser
+                ) B ON A.login_user = B.p_no
+        WHERE A.project_code = #{prj_code} and A.list_id = #{list_id}
+        ORDER BY A.id DESC
+    </select>
+    
+    <select id="getStatusResult" resultType="_int">
+        SELECT contact_stat
+        FROM CONTACT_STATUS
+        WHERE project_code = #{prjCode} AND list_id = #{listId}
+    </select>
+
+    <update id="resultCodeReset">
+        UPDATE CONTACT_STATUS SET contact_name = NULL, contact_stat = 0 WHERE project_code = #{prjCode} AND list_id = #{listId}
+    </update>
+
+    <update id="ProgressContactReset">
+        UPDATE CONTACT_STATUS SET contact_name = NULL, contact_stat = 0 WHERE contact_name = #{p_no} AND contact_stat = 999
+    </update>
+
+    <insert id="SendSmsLog">
+        INSERT INTO CONTACT_SMS_LOG VALUES(#{listId}, #{loginUser.p_no}, #{receiver}, #{content}, GETDATE(), #{prjCode})
+    </insert>
+
+    <select id="GetSmsLog" resultMap="SendSmsLog">
+        SELECT B.p_name as name,
+               A.receiver as receiver,
+               FORMAT(A.send_date, 'yyyy-MM-dd tt hh:mm:ss') as send_date
+        FROM CONTACT_SMS_LOG A WITH(NOLOCK)
+                     LEFT JOIN(
+                SELECT cast(p_no as varchar) as p_no,
+                       p_name,
+                       p_pass_new as p_pass,
+                       '서울'   as p_area,
+                       '관리자' as p_type,
+                       p_user_mail as p_email,
+                       p_tel3  as p_tel
+                FROM  [NO.6].project2.dbo.person WITH(NOLOCK)
+                WHERE p_resign = '0'
+                UNION ALL
+                SELECT p_no,
+                       p_name,
+                       p_pass,
+                       p_area,
+                       p_type,
+                       p_mail,
+                       p_tel
+                FROM
+                        (
+                                SELECT new_id as p_no,
+                                       m_name as p_name,
+                                       LEFT(m_jumin, 6) as p_pass,
+                                       '' as p_area,
+                                       '컨택원' as p_type,
+                                       ''  as p_mail,
+                                       m_mobile as p_tel
+                                FROM [NO.6].project2.dbo.man WITH(NOLOCK)
+                                ) as cuser
+                ) B ON A.login_user = B.p_no
+        WHERE A.project_code = #{prj_code} and A.list_id = #{list_id}
+        ORDER BY A.id DESC
+    </select>
+</mapper>

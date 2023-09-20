@@ -1,0 +1,252 @@
+
+/* css 초기화 */
+/*html, body, div, span, applet, object, iframe, table, caption, tbody, tfoot, thead, tr, th, td,*/
+/*del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,*/
+/*h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code,*/
+/*dl, dt, dd, ol, ul, li, fieldset, form, label, legend {*/
+/*    vertical-align: baseline;*/
+/*    font-family: inherit;*/
+/*    font-weight: inherit;*/
+/*    font-style: inherit;*/
+/*    outline: 0;*/
+/*    padding: 0;*/
+/*    margin: 0;*/
+/*    border: 0;*/
+/*}*/
+
+/*a {*/
+/*    color: #fff;*/
+/*    text-decoration: none;*/
+/*    outline: none*/
+/*}*/
+
+/*a:hover, a:active {*/
+/*    text-decoration: none;*/
+/*    color: #fff;;*/
+/*}*/
+
+/*:focus {*/
+/*    outline: 0;*/
+/*}*/
+
+/*body {*/
+/*    background: #ececec;*/
+/*    line-height: 1;*/
+/*    color: black;*/
+/*}*/
+
+/*!*- 한글 기준은 1.2 -*!*/
+/*ol, ul {*/
+/*    list-style: none;*/
+/*}*/
+
+/*table {*/
+/*    border-collapse: separate;*/
+/*    border-spacing: 0;*/
+/*}*/
+
+/*caption, th, td {*/
+/*    font-weight: normal;*/
+/*    text-align: left;*/
+/*}*/
+
+/*blockquote:before, blockquote:after, q:before, q:after {*/
+/*    content: "";*/
+/*}*/
+
+/*blockquote, q {*/
+/*    quotes: "" "";*/
+/*}*/
+
+/*input:-webkit-autofill,*/
+/*input:-webkit-autofill:hover,*/
+/*input:-webkit-autofill:focus,*/
+/*input:-webkit-autofill:active {*/
+/*    transition: background-color 5000s ease-in-out 0s;*/
+/*    -webkit-transition: background-color 9999s ease-out;*/
+/*    -webkit-box-shadow: none;*/
+/*    -webkit-text-fill-color: #000 !important;*/
+/*}*/
+
+/*!*헤더*!*/
+/*html, body {*/
+/*    background-color: #3585FF;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*}*/
+
+/*#container {*/
+/*    position: relative;*/
+/*    background-color: #f2f3f8;*/
+/*    height: 100%;*/
+/*    z-index: 50;*/
+/*    transition: all .3s;*/
+/*    padding-top: 56px!important;*/
+/*    padding-bottom: 0!important;*/
+/*}*/
+
+/*#title {*/
+/*    position: absolute;*/
+/*    top: 15px;*/
+/*    left: 50px;*/
+/*    cursor: pointer;*/
+/*    z-index: 51;*/
+/*    font-family: Fivo-Black;*/
+/*    font-size: 2rem;*/
+/*    font-weight: bold;*/
+/*    color: #fff;*/
+/*}*/
+
+/*.leftMenu {*/
+/*    position: absolute;*/
+/*    top: 4%;*/
+/*    left: 0;*/
+/*    width: 15%;*/
+/*    height: 96%;*/
+/*    color: #fff;*/
+/*}*/
+
+/*.leftMenu .footer {*/
+/*    position: absolute;*/
+/*    bottom: 0;*/
+/*}*/
+
+/*.leftMenu .footer p {*/
+/*    font-size: 9px;*/
+/*    color: #fff;*/
+/*    padding: 20px 0;*/
+/*}*/
+
+/*input[id="menuicon"] {*/
+/*    display: none;*/
+/*}*/
+
+/*input[id="menuicon"] + label {*/
+/*    display: block;*/
+/*    margin: 10px;*/
+/*    width: 25px;*/
+/*    height: 25px;*/
+/*    position: absolute;*/
+/*    top: 5px;*/
+/*    left: 5px;*/
+/*    cursor: pointer;*/
+/*    z-index: 51;*/
+/*}*/
+
+/*input[id="menuicon"] + label span {*/
+/*    display: block;*/
+/*    position: absolute;*/
+/*    width: 100%;*/
+/*    height: 5px;*/
+/*    border-radius: 30px;*/
+/*    background: #fff;*/
+/*    transition: all .35s;*/
+/*}*/
+
+/*input[id="menuicon"] + label span:nth-child(1) {*/
+/*    top: 0;*/
+/*}*/
+
+/*input[id="menuicon"] + label span:nth-child(2) {*/
+/*    top: 50%;*/
+/*    transform: translateY(-50%);*/
+/*}*/
+
+/*input[id="menuicon"] + label span:nth-child(3) {*/
+/*    bottom: 0;*/
+/*}*/
+
+/*input[id="menuicon"]:checked + label {*/
+/*    z-index: 51;*/
+/*}*/
+
+/*input[id="menuicon"]:checked + label span:nth-child(1) {*/
+/*    top: 50%;*/
+/*    transform: translateY(-90%) rotate(45deg);*/
+/*}*/
+
+/*input[id="menuicon"]:checked + label span:nth-child(2) {*/
+/*    opacity: 0;*/
+/*}*/
+
+/*input[id="menuicon"]:checked + label span:nth-child(3) {*/
+/*    bottom: 50%;*/
+/*    transform: rotate(-45deg);*/
+/*}*/
+/*#dropmenu{*/
+/*    display: none;*/
+/*    width: 170px;*/
+/*    top: 50px;*/
+/*    left: 15px;*/
+/*    z-index: 999;*/
+/*}*/
+/*#dropmenu .btn-outline-success {*/
+/*    color: #193bb7;*/
+/*    border-color: #193bb7;*/
+/*}*/
+/*#dropmenu .btn-outline-success:hover {*/
+/*    color: #fff;*/
+/*    background-color: #2855a7;*/
+/*    border-color: #2855a7;*/
+/*}*/
+/*#dropmenu .btn-outline-success:active {*/
+/*    box-shadow: 0 0 0 0.25rem #193b8780;*/
+/*}*/
+/*#dropmenu .btn-outline-success:focus {*/
+/*    box-shadow: 0 0 0 0.25rem #193b8780;*/
+/*}*/
+
+/*.left_Menu {*/
+/*    margin-top: 5%;*/
+/*}*/
+
+/*.left_Menu li:first-child {*/
+/*    padding-top: 20px;*/
+/*}*/
+
+/*.left_Menu li {*/
+/*    text-align: center;*/
+/*    padding: 20px 0;*/
+/*    font-size: 20px;*/
+/*    font-weight: bold;*/
+/*}*/
+
+/*.left_Menu li:hover {*/
+/*    background-color: #2B7DFE;*/
+/*}*/
+
+/*.left_Menu li:hover a {*/
+/*    color: #ffd700;*/
+/*    position: relative;*/
+/*    padding-bottom: 5px;*/
+/*}*/
+
+/*.left_Menu li a:before {*/
+/*    content: "";*/
+/*    position: absolute;*/
+/*    bottom: 0;*/
+/*    left: 50%;*/
+/*    width: 0;*/
+/*    height: 3px;*/
+/*    transform: translateX(-50%);*/
+/*    background-color: #ffd700;*/
+/*    transition: all .3s*/
+/*}*/
+
+/*.left_Menu li a:hover:before {*/
+/*    width: 100%;*/
+/*}*/
+
+/*div.fw-bold.fs-2 > p {*/
+/*    color: #fff;*/
+/*    margin: 0;*/
+/*}*/
+
+/*.MenuChk {*/
+/*    width: 85%;*/
+/*    border-radius: 25px 0 0 25px;*/
+/*}*/
+/*.headerWidth{*/
+/*    width: 100%!important;*/
+/*}*/
+

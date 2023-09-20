@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="userMapper">
+
+    <select id="login" resultType="UserVo">
+
+        <if test="p_email != null">
+            SELECT p_no,
+            p_name,
+            p_pass_new as p_pass,
+            '서울'   as p_area,
+            '관리자' as p_type,
+            p_user_mail as p_email,
+            p_tel3  as p_tel
+            FROM  project2.dbo.person WITH(NOLOCK)
+            WHERE p_resign = '0'
+                AND p_user_mail = #{p_email}
+                AND p_pass_new = #{p_pass}
+        </if>
+        <if test="p_name != null">
+            SELECT p_no,
+                   p_name,
+                   p_pass,
+                   p_area,
+                   p_type,
+                   p_mail,
+                   p_tel
+            FROM
+                (
+                SELECT new_id as p_no,
+                m_name as p_name,
+                LEFT(m_jumin, 6) as p_pass,
+                '' as p_area,
+                '컨택원' as p_type,
+                ''  as p_mail,
+                m_mobile as p_tel
+                FROM project2.dbo.man WITH(NOLOCK)
+                ) as cuser
+            WHERE p_name = #{p_name}
+                AND p_pass = #{p_pass}
+        </if>
+
+    </select>
+
+</mapper>

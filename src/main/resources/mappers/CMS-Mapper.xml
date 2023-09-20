@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cmsMapper">
+    <resultMap id="CMSSetting" type="CMSSettingVo">
+        <result property="code" column="code"/>
+        <result property="name" column="name"/>
+        <result property="chkYN" column="ChkYn"/>
+    </resultMap>
+
+    <resultMap id="CMSTypeVo" type="CMSTypeVo">
+        <result property="code" column="code"/>
+        <result property="name" column="name"/>
+        <result property="cmsType" column="cmsType"/>
+    </resultMap>
+
+    <resultMap id="CMSInfoVo" type="CMSInfoVo">
+        <result property="code" column="code"/>
+        <result property="name" column="name"/>
+        <result property="sender" column="sender"/>
+        <result property="content" column="content"/>
+    </resultMap>
+
+    <resultMap id="CMSVariableVo" type="CMSVariableVo">
+        <result property="code" column="code"/>
+        <result property="name" column="name"/>
+        <result property="chkYN" column="chkYN"/>
+    </resultMap>
+
+    <resultMap id="CMSFileVo" type="CMSFileVo">
+        <result property="code" column="code"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <select id="GetVariable" resultMap="CMSSetting">
+        <if test='vtype.equals("Email")'>
+            SELECT A.name AS name,
+            A.list_order AS code,
+            CASE WHEN (B.type_value IS NULL) THEN 'N' ELSE 'Y' END AS ChkYn
+            FROM (
+                SELECT *
+                FROM LIST_TYPE_IX WITH(NOLOCK)
+            ) A
+            LEFT JOIN (
+                SELECT *
+                FROM EMAIL_VARIABLE WITH(NOLOCK)
+            ) B
+            ON (A.list_order = B.type_value AND A.project_code = B.project_code)
+            WHERE A.project_code = #{prj_code}
+        </if>
+        <if test='vtype.equals("SMS")'>
+            SELECT A.name AS name,
+            A.list_order AS code,
+            CASE WHEN (B.type_value IS NULL) THEN 'N' ELSE 'Y' END AS ChkYn
+            FROM (
+                SELECT *
+                FROM LIST_TYPE_IX WITH(NOLOCK)
+            ) A
+            LEFT JOIN (
+                SELECT *
+                FROM SMS_VARIABLE WITH(NOLOCK)
+            ) B
+            ON (A.list_order = B.type_value AND A.project_code = B.project_code)
+            WHERE A.project_code = #{prj_code}
+        </if>
+    </select>
+
+    <insert id="CMS_SET_INSERT">
+        INSERT INTO CONTACT_MESSAGE_SETTING VALUES(#{prjcode}, #{typename}, #{sender}, #{content}, #{cmstype})
+    </insert>
+
+    <insert id="CMS_SET_INSERT_FILE">
+        <selectKey keyProperty="cmsnCode" resultType="_int" order="BEFORE">
+            select Max(id) from CONTACT_MESSAGE_SETTING
+        </selectKey>
+
+        INSERT INTO CONTACT_MESSAGE_SETTING_FILE(project_code, type_code, type_name, cmstype, filename, deleteYn) VALUES
+        <if test='cmscode == null'>
+            <foreach collection="cmsFile" item="item" separator=" , " >
+                (#{prjcode}, #{cmsnCode}, #{typename}, #{cmstype}, #{item}, default)
+            </foreach>
+        </if>
+        <if test='cmscode != null'>
+            <foreach collection="cmsFile" item="item" separator=" , " >
+                (#{prjcode}, #{cmscode}, #{typename}, #{cmstype}, #{item}, default)
+            </foreach>
+        </if>
+    </insert>
+
+    <insert id="CMS_SET_INSERT_LOG">
+        <selectKey keyProperty="cmsCode" resultType="_int" order="BEFORE">
+            select Max(id) from CONTACT_MESSAGE_SETTING
+        </selectKey>
+
+        INSERT INTO CONTACT_MESSAGE_SETTING_LOG VALUES(#{prjcode}, #{cmsCode}, #{typename}, #{cmstype}, #{logText}, #{loginUser.p_email}, GETDATE())
+    </insert>
+
+    <insert id="CMS_SET_INSERT_VARIABLE">
+        <selectKey keyProperty="cmsCode" resultType="_int" order="BEFORE">
+            select Max(id) from CONTACT_MESSAGE_SETTING
+        </selectKey>
+
+        INSERT INTO CONTACT_MESSAGE_SETTING_VARIABLE(project_code, type_code, type_name, cmstype, vcode) VALUES
+
+        <foreach collection="select_variable" item="item" separator=" , " >
+            (#{prjcode}, #{cmsCode}, #{typename}, #{cmstype}, #{item})
+        </foreach>
+
+    </insert>
+
+    <select id="GetCMSType" resultMap="CMSTypeVo">
+        SELECT id as code,
+               type_name as name,
+               cmstype as cmsType
+        FROM CONTACT_MESSAGE_SETTING WITH(NOLOCK)
+        WHERE project_code = #{prj_code}
+        ORDER BY id DESC
+    </select>
+
+    <select id="CMS_GET_INFO" resultMap="CMSInfoVo">
+        SELECT id as code,
+               type_name as name,
+               sender as sender,
+               content
+        FROM CONTACT_MESSAGE_SETTING WITH(NOLOCK)
+        WHERE project_code = #{prj_code} AND id = #{cms_code} AND cmstype = #{cms_type}
+    </select>
+
+    <select id="CMS_GET_VARIABLE" resultMap="CMSVariableVo">
+        SELECT A.name AS name,
+               A.list_order AS code,
+               CASE WHEN (B.vcode IS NULL) THEN 'N' ELSE 'Y' END AS ChkYn
+        FROM (
+                 SELECT *
+                 FROM LIST_TYPE_IX WITH(NOLOCK)
+             ) A
+             LEFT JOIN (
+                 SELECT *
+                 FROM CONTACT_MESSAGE_SETTING_VARIABLE WITH(NOLOCK)
+                 WHERE project_code = #{prj_code} and type_code = #{cms_code} and cmstype = #{cms_type}
+             ) B
+             ON (A.list_order = B.vcode AND A.project_code = B.project_code)
+        WHERE A.project_code = #{prj_code}
+    </select>
+
+    <select id="CMS_GET_FILE" resultType="CMSFileVo">
+        SELECT id as code, filename as name
+        FROM CONTACT_MESSAGE_SETTING_FILE WITH(NOLOCK)
+        WHERE project_code = #{prj_code} AND type_code = #{cms_code} AND deleteYn = 'N'
+    </select>
+
+    <update id="CMS_SET_MODIFY">
+        UPDATE CONTACT_MESSAGE_SETTING
+        SET type_name = #{typename}, sender = #{sender}, content = #{content}
+        WHERE project_code = #{prjcode} AND id = #{cmscode}
+    </update>
+
+    <delete id="CMS_SET_REMOVE_VARIABLE">
+        DELETE FROM CONTACT_MESSAGE_SETTING_VARIABLE
+        WHERE project_code = #{prjcode} AND type_code = #{cmscode}
+    </delete>
+    
+    <select id="CMS_GET_FILENAME" resultType="CMSFileVo">
+        SELECT id as code, filename as name
+        FROM CONTACT_MESSAGE_SETTING_FILE WITH(NOLOCK)
+        WHERE id IN (${deleteFile})
+    </select>
+
+    <update id="CMS_REMOVE_FILE">
+        UPDATE CONTACT_MESSAGE_SETTING_FILE
+        SET deleteYn = 'Y'
+        WHERE id IN (${deleteFile})
+    </update>
+</mapper>

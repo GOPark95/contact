@@ -1,0 +1,1324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="Contact">
+  <database-model serializer="dbm" dbms="MSSQL" family-id="MSSQL" format-version="4.20">
+    <root id="1">
+      <ServerVersion>14.0.2042</ServerVersion>
+      <PermissionsCheckSum>59555338564</PermissionsCheckSum>
+      <Grants>0|root||1|connect sql|G
+0|root||2|view any database|G
+0|root||101|view any definition|G
+0|root||102|authenticate server|G
+0|root||102|view any definition|G
+0|root||102|view server state|G
+0|root||103|authenticate server|G
+0|root||105|control server|G
+0|root||105|view any definition|G
+0|root||106|view any definition|G
+0|root||257|connect sql|G
+0|root||257|view any definition|G
+0|root||257|view server state|G
+0|root||259|connect sql|G
+0|root||260|connect sql|G
+0|root||261|connect sql|G
+0|root||262|connect sql|G
+0|root||263|alter any availability group|G
+0|root||263|connect sql|G
+0|root||263|view server state|G
+0|root||264|connect sql|G
+0|root||265|alter any event session|G
+0|root||265|connect any database|G
+0|root||265|connect sql|G
+0|root||265|view any definition|G
+0|root||265|view server state|G
+0|root||266|connect sql|G
+0|root||270|connect sql|G
+0|root||271|connect sql|G
+0|root||272|connect sql|G
+0|root||274|connect sql|G
+0|root||275|connect sql|G
+0|root||279|connect sql|G
+0|root||280|connect sql|G
+0|root||281|connect sql|G
+0|root||282|connect sql|G
+0|root||283|connect sql|G
+2|||2|connect|G
+3|||2|connect|G
+4|||2|connect|G
+5|||2|connect|G
+</Grants>
+    </root>
+    <database id="2" parent="1" name="BTS">
+      <ObjectId>23</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="3" parent="1" name="Contact">
+      <ObjectId>22</ObjectId>
+      <PermissionsCheckSum>4255254626</PermissionsCheckSum>
+      <Grants>22|database||0|view any column encryption key definition|G
+22|database||0|view any column master key definition|G
+22|database||1|connect|G
+22|database||5|connect|G
+</Grants>
+      <Current>1</Current>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+      <Fingerprint>22.44426/2BB30665-FFA7-428A-9757-BDD632CE1BE2@WIN-C7H7BJQHOCN</Fingerprint>
+    </database>
+    <database id="4" parent="1" name="HMC">
+      <ObjectId>11</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="5" parent="1" name="HMC_GMS">
+      <ObjectId>12</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="6" parent="1" name="JP">
+      <ObjectId>13</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="7" parent="1" name="Kon">
+      <ObjectId>8</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="8" parent="1" name="KonKiwi">
+      <ObjectId>20</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="9" parent="1" name="KonTran">
+      <ObjectId>18</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="10" parent="1" name="MSG_TRAN">
+      <ObjectId>21</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="11" parent="1" name="REPORT_KON">
+      <ObjectId>16</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="12" parent="1" name="exitpoll_2022le">
+      <ObjectId>24</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="13" parent="1" name="exitpoll_2022pe">
+      <ObjectId>17</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="14" parent="1" name="keps">
+      <ObjectId>7</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="15" parent="1" name="kri_exit_poll_2020">
+      <ObjectId>5</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="16" parent="1" name="kweb">
+      <ObjectId>19</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="17" parent="1" name="lghs">
+      <ObjectId>15</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="18" parent="1" name="master">
+      <ObjectId>1</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="19" parent="1" name="model">
+      <ObjectId>3</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="20" parent="1" name="msdb">
+      <ObjectId>4</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="21" parent="1" name="nhqv">
+      <ObjectId>6</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="22" parent="1" name="spc">
+      <ObjectId>9</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="23" parent="1" name="spc_test">
+      <ObjectId>14</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="24" parent="1" name="spcstaff">
+      <ObjectId>10</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <database id="25" parent="1" name="tempdb">
+      <ObjectId>2</ObjectId>
+      <Collation>Korean_Wansung_CI_AS</Collation>
+    </database>
+    <login id="26" parent="1" name="sa">
+      <ObjectId>1</ObjectId>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="27" parent="1" name="public">
+      <ObjectId>2</ObjectId>
+      <Type>server-role</Type>
+      <Enabled>1</Enabled>
+    </login>
+    <login id="28" parent="1" name="sysadmin">
+      <ObjectId>3</ObjectId>
+      <Type>server-role</Type>
+      <Enabled>1</Enabled>
+    </login>
+    <login id="29" parent="1" name="securityadmin">
+      <ObjectId>4</ObjectId>
+      <Type>server-role</Type>
+      <Enabled>1</Enabled>
+    </login>
+    <login id="30" parent="1" name="serveradmin">
+      <ObjectId>5</ObjectId>
+      <Type>server-role</Type>
+      <Enabled>1</Enabled>
+    </login>
+    <login id="31" parent="1" name="setupadmin">
+      <ObjectId>6</ObjectId>
+      <Type>server-role</Type>
+      <Enabled>1</Enabled>
+    </login>
+    <login id="32" parent="1" name="processadmin">
+      <ObjectId>7</ObjectId>
+      <Type>server-role</Type>
+      <Enabled>1</Enabled>
+    </login>
+    <login id="33" parent="1" name="diskadmin">
+      <ObjectId>8</ObjectId>
+      <Type>server-role</Type>
+      <Enabled>1</Enabled>
+    </login>
+    <login id="34" parent="1" name="dbcreator">
+      <ObjectId>9</ObjectId>
+      <Type>server-role</Type>
+      <Enabled>1</Enabled>
+    </login>
+    <login id="35" parent="1" name="bulkadmin">
+      <ObjectId>10</ObjectId>
+      <Type>server-role</Type>
+      <Enabled>1</Enabled>
+    </login>
+    <login id="36" parent="1" name="##MS_SQLResourceSigningCertificate##">
+      <ObjectId>101</ObjectId>
+      <Type>certificate-mapped-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="37" parent="1" name="##MS_SQLReplicationSigningCertificate##">
+      <ObjectId>102</ObjectId>
+      <Type>certificate-mapped-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="38" parent="1" name="##MS_SQLAuthenticatorCertificate##">
+      <ObjectId>103</ObjectId>
+      <Type>certificate-mapped-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="39" parent="1" name="##MS_PolicySigningCertificate##">
+      <ObjectId>105</ObjectId>
+      <Type>certificate-mapped-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="40" parent="1" name="##MS_SmoExtendedSigningCertificate##">
+      <ObjectId>106</ObjectId>
+      <Type>certificate-mapped-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="41" parent="1" name="##MS_PolicyEventProcessingLogin##">
+      <ObjectId>256</ObjectId>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="42" parent="1" name="##MS_PolicyTsqlExecutionLogin##">
+      <ObjectId>257</ObjectId>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="43" parent="1" name="##MS_AgentSigningCertificate##">
+      <ObjectId>258</ObjectId>
+      <Type>certificate-mapped-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="44" parent="1" name="WIN-C7H7BJQHOCN\Administrator">
+      <ObjectId>259</ObjectId>
+      <Type>windows-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="45" parent="1" name="NT SERVICE\SQLWriter">
+      <ObjectId>260</ObjectId>
+      <Type>windows-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="46" parent="1" name="NT SERVICE\Winmgmt">
+      <ObjectId>261</ObjectId>
+      <Type>windows-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="47" parent="1" name="NT Service\MSSQLSERVER">
+      <ObjectId>262</ObjectId>
+      <Type>windows-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="48" parent="1" name="NT AUTHORITY\SYSTEM">
+      <ObjectId>263</ObjectId>
+      <Type>windows-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="49" parent="1" name="NT SERVICE\SQLSERVERAGENT">
+      <ObjectId>264</ObjectId>
+      <Type>windows-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="50" parent="1" name="NT SERVICE\SQLTELEMETRY">
+      <ObjectId>265</ObjectId>
+      <Type>windows-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="51" parent="1" name="2020poll">
+      <ObjectId>266</ObjectId>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="52" parent="1" name="kon">
+      <ObjectId>270</ObjectId>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="53" parent="1" name="spc">
+      <ObjectId>271</ObjectId>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="54" parent="1" name="hmcgms">
+      <ObjectId>272</ObjectId>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>HMC_GMS</DefaultDatabase>
+    </login>
+    <login id="55" parent="1" name="report_kon">
+      <ObjectId>274</ObjectId>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>REPORT_KON</DefaultDatabase>
+    </login>
+    <login id="56" parent="1" name="bts_user">
+      <ObjectId>275</ObjectId>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>Kon</DefaultDatabase>
+    </login>
+    <login id="57" parent="1" name="konTran">
+      <ObjectId>279</ObjectId>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>KonTran</DefaultDatabase>
+    </login>
+    <login id="58" parent="1" name="msg_tran_user">
+      <ObjectId>280</ObjectId>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>MSG_TRAN</DefaultDatabase>
+    </login>
+    <login id="59" parent="1" name="##MS_PolicyEventProcessingLogin##">
+      <ObjectId>281</ObjectId>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="60" parent="1" name="##MS_AgentSigningCertificate##">
+      <ObjectId>282</ObjectId>
+      <Type>certificate-mapped-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="61" parent="1" name="aibd_fitbit">
+      <ObjectId>283</ObjectId>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <schema id="62" parent="3" name="INFORMATION_SCHEMA">
+      <ObjectId>3</ObjectId>
+    </schema>
+    <schema id="63" parent="3" name="db_accessadmin">
+      <ObjectId>16385</ObjectId>
+    </schema>
+    <schema id="64" parent="3" name="db_backupoperator">
+      <ObjectId>16389</ObjectId>
+    </schema>
+    <schema id="65" parent="3" name="db_datareader">
+      <ObjectId>16390</ObjectId>
+    </schema>
+    <schema id="66" parent="3" name="db_datawriter">
+      <ObjectId>16391</ObjectId>
+    </schema>
+    <schema id="67" parent="3" name="db_ddladmin">
+      <ObjectId>16387</ObjectId>
+    </schema>
+    <schema id="68" parent="3" name="db_denydatareader">
+      <ObjectId>16392</ObjectId>
+    </schema>
+    <schema id="69" parent="3" name="db_denydatawriter">
+      <ObjectId>16393</ObjectId>
+    </schema>
+    <schema id="70" parent="3" name="db_owner">
+      <ObjectId>16384</ObjectId>
+    </schema>
+    <schema id="71" parent="3" name="db_securityadmin">
+      <ObjectId>16386</ObjectId>
+    </schema>
+    <schema id="72" parent="3" name="dbo">
+      <ObjectId>1</ObjectId>
+      <IntrospectionTimestamp>2023-09-14.23:23:07.133</IntrospectionTimestamp>
+      <Current>1</Current>
+    </schema>
+    <schema id="73" parent="3" name="guest">
+      <ObjectId>2</ObjectId>
+    </schema>
+    <schema id="74" parent="3" name="sys">
+      <ObjectId>4</ObjectId>
+    </schema>
+    <role id="75" parent="3" name="public">
+      <ObjectId>0</ObjectId>
+      <OwnerId>1</OwnerId>
+      <Type>database-role</Type>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="76" parent="3" name="dbo">
+      <ObjectId>1</ObjectId>
+      <DefaultSchema>dbo</DefaultSchema>
+      <AuthType>instance</AuthType>
+    </role>
+    <role id="77" parent="3" name="guest">
+      <ObjectId>2</ObjectId>
+      <DefaultSchema>guest</DefaultSchema>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="78" parent="3" name="INFORMATION_SCHEMA">
+      <ObjectId>3</ObjectId>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="79" parent="3" name="sys">
+      <ObjectId>4</ObjectId>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="80" parent="3" name="2020poll">
+      <ObjectId>5</ObjectId>
+      <DefaultSchema>dbo</DefaultSchema>
+      <AuthType>instance</AuthType>
+    </role>
+    <role id="81" parent="3" name="db_owner">
+      <ObjectId>16384</ObjectId>
+      <OwnerId>1</OwnerId>
+      <Type>database-role</Type>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="82" parent="3" name="db_accessadmin">
+      <ObjectId>16385</ObjectId>
+      <OwnerId>1</OwnerId>
+      <Type>database-role</Type>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="83" parent="3" name="db_securityadmin">
+      <ObjectId>16386</ObjectId>
+      <OwnerId>1</OwnerId>
+      <Type>database-role</Type>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="84" parent="3" name="db_ddladmin">
+      <ObjectId>16387</ObjectId>
+      <OwnerId>1</OwnerId>
+      <Type>database-role</Type>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="85" parent="3" name="db_backupoperator">
+      <ObjectId>16389</ObjectId>
+      <OwnerId>1</OwnerId>
+      <Type>database-role</Type>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="86" parent="3" name="db_datareader">
+      <ObjectId>16390</ObjectId>
+      <OwnerId>1</OwnerId>
+      <Type>database-role</Type>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="87" parent="3" name="db_datawriter">
+      <ObjectId>16391</ObjectId>
+      <OwnerId>1</OwnerId>
+      <Type>database-role</Type>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="88" parent="3" name="db_denydatareader">
+      <ObjectId>16392</ObjectId>
+      <OwnerId>1</OwnerId>
+      <Type>database-role</Type>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="89" parent="3" name="db_denydatawriter">
+      <ObjectId>16393</ObjectId>
+      <OwnerId>1</OwnerId>
+      <Type>database-role</Type>
+      <AuthType>none</AuthType>
+    </role>
+    <table id="90" parent="72" name="CONTACT_CALL_LOG">
+      <ObjectId>338100245</ObjectId>
+      <CreatedTimestamp>2022-11-17.01:40:44.003</CreatedTimestamp>
+      <ModifiedTimestamp>2022-11-17.01:40:44.140</ModifiedTimestamp>
+    </table>
+    <table id="91" parent="72" name="CONTACT_EMAIL_LOG">
+      <ObjectId>402100473</ObjectId>
+      <CreatedTimestamp>2022-11-17.05:25:31.303</CreatedTimestamp>
+      <ModifiedTimestamp>2022-11-17.05:25:31.347</ModifiedTimestamp>
+    </table>
+    <table id="92" parent="72" name="CONTACT_MESSAGE_SETTING">
+      <ObjectId>178099675</ObjectId>
+      <CreatedTimestamp>2022-08-09.23:38:17.670</CreatedTimestamp>
+      <ModifiedTimestamp>2022-08-09.23:38:17.800</ModifiedTimestamp>
+    </table>
+    <table id="93" parent="72" name="CONTACT_MESSAGE_SETTING_FILE">
+      <ObjectId>34099162</ObjectId>
+      <CreatedTimestamp>2022-05-23.23:09:28.500</CreatedTimestamp>
+      <ModifiedTimestamp>2022-05-23.23:09:28.500</ModifiedTimestamp>
+    </table>
+    <table id="94" parent="72" name="CONTACT_MESSAGE_SETTING_LOG">
+      <ObjectId>146099561</ObjectId>
+      <CreatedTimestamp>2022-05-23.23:09:49</CreatedTimestamp>
+      <ModifiedTimestamp>2022-05-23.23:09:49</ModifiedTimestamp>
+    </table>
+    <table id="95" parent="72" name="CONTACT_MESSAGE_SETTING_VARIABLE">
+      <ObjectId>114099447</ObjectId>
+      <CreatedTimestamp>2022-05-23.23:09:44.877</CreatedTimestamp>
+      <ModifiedTimestamp>2022-05-23.23:09:44.877</ModifiedTimestamp>
+    </table>
+    <table id="96" parent="72" name="CONTACT_MODIFY_LOG">
+      <ObjectId>1253579504</ObjectId>
+      <CreatedTimestamp>2022-02-20.23:00:26.420</CreatedTimestamp>
+      <ModifiedTimestamp>2022-02-20.23:00:26.420</ModifiedTimestamp>
+    </table>
+    <table id="97" parent="72" name="CONTACT_PROJECT">
+      <ObjectId>901578250</ObjectId>
+      <CreatedTimestamp>2021-08-19.23:54:49.127</CreatedTimestamp>
+      <ModifiedTimestamp>2021-08-20.00:04:44.303</ModifiedTimestamp>
+    </table>
+    <table id="98" parent="72" name="CONTACT_RESULT_LOG">
+      <ObjectId>1349579846</ObjectId>
+      <CreatedTimestamp>2022-02-21.20:52:01.237</CreatedTimestamp>
+      <ModifiedTimestamp>2022-02-21.20:52:01.237</ModifiedTimestamp>
+    </table>
+    <table id="99" parent="72" name="CONTACT_SMS_LOG">
+      <ObjectId>658101385</ObjectId>
+      <CreatedTimestamp>2023-09-12.01:29:43.693</CreatedTimestamp>
+      <ModifiedTimestamp>2023-09-12.01:29:43.693</ModifiedTimestamp>
+    </table>
+    <table id="100" parent="72" name="CONTACT_STATUS">
+      <ObjectId>450100644</ObjectId>
+      <CreatedTimestamp>2023-01-17.01:26:05.040</CreatedTimestamp>
+      <ModifiedTimestamp>2023-01-17.01:26:05.163</ModifiedTimestamp>
+    </table>
+    <table id="101" parent="72" name="DIVISION_CODE">
+      <ObjectId>1029578706</ObjectId>
+      <CreatedTimestamp>2021-08-19.23:57:25.803</CreatedTimestamp>
+      <ModifiedTimestamp>2021-08-19.23:57:25.803</ModifiedTimestamp>
+    </table>
+    <table id="102" parent="72" name="EMAIL_VARIABLE">
+      <ObjectId>1477580302</ObjectId>
+      <CreatedTimestamp>2022-03-22.20:32:57.380</CreatedTimestamp>
+      <ModifiedTimestamp>2022-03-22.20:32:57.380</ModifiedTimestamp>
+    </table>
+    <table id="103" parent="72" name="KON_LINK_TYPE">
+      <ObjectId>1077578877</ObjectId>
+      <CreatedTimestamp>2021-08-21.20:27:55.307</CreatedTimestamp>
+      <ModifiedTimestamp>2021-08-21.20:27:55.307</ModifiedTimestamp>
+    </table>
+    <table id="104" parent="72" name="LIST">
+      <ObjectId>1205579333</ObjectId>
+      <CreatedTimestamp>2022-02-20.08:27:11.823</CreatedTimestamp>
+      <ModifiedTimestamp>2022-02-20.08:27:11.823</ModifiedTimestamp>
+    </table>
+    <table id="105" parent="72" name="LIST_TYPE_IX">
+      <ObjectId>1285579618</ObjectId>
+      <CreatedTimestamp>2022-02-21.00:21:52.180</CreatedTimestamp>
+      <ModifiedTimestamp>2022-02-21.00:21:52.180</ModifiedTimestamp>
+    </table>
+    <table id="106" parent="72" name="PROJECT_LOG">
+      <ObjectId>997578592</ObjectId>
+      <CreatedTimestamp>2021-08-19.23:55:41.440</CreatedTimestamp>
+      <ModifiedTimestamp>2021-08-19.23:55:41.440</ModifiedTimestamp>
+    </table>
+    <table id="107" parent="72" name="RESULT_CODE">
+      <ObjectId>1061578820</ObjectId>
+      <CreatedTimestamp>2021-08-19.23:59:01.170</CreatedTimestamp>
+      <ModifiedTimestamp>2021-08-19.23:59:01.170</ModifiedTimestamp>
+    </table>
+    <table id="108" parent="72" name="SMS_VARIABLE">
+      <ObjectId>1509580416</ObjectId>
+      <CreatedTimestamp>2022-03-22.20:33:01.143</CreatedTimestamp>
+      <ModifiedTimestamp>2022-03-22.20:33:01.143</ModifiedTimestamp>
+    </table>
+    <routine id="109" parent="72" name="GetListInfo">
+      <ObjectId>434100587</ObjectId>
+      <SourceTextLength>542</SourceTextLength>
+      <CreatedTimestamp>2022-11-22.01:25:15.140</CreatedTimestamp>
+      <ModifiedTimestamp>2022-12-10.05:54:34.523</ModifiedTimestamp>
+      <RoutineType>proc</RoutineType>
+    </routine>
+    <column id="110" parent="90" name="id">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="111" parent="90" name="list_id">
+      <Position>2</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="112" parent="90" name="login_user">
+      <Position>3</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="113" parent="90" name="call_number">
+      <Position>4</Position>
+      <DataType>varchar(100 char)|0s</DataType>
+    </column>
+    <column id="114" parent="90" name="calling_time">
+      <Position>5</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="115" parent="90" name="start_time">
+      <Position>6</Position>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="116" parent="90" name="end_time">
+      <Position>7</Position>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="117" parent="90" name="project_code">
+      <Position>8</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <index id="118" parent="90" name="PK__CONTACT___3213E83F4AAD7969">
+      <Position>1</Position>
+      <ColNames>id</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="119" parent="90" name="PK__CONTACT___3213E83F4AAD7969">
+      <ObjectId>354100302</ObjectId>
+      <CreatedTimestamp>2022-11-17.01:40:44.133</CreatedTimestamp>
+      <ModifiedTimestamp>2022-11-17.01:40:44.133</ModifiedTimestamp>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>PK__CONTACT___3213E83F4AAD7969</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="120" parent="91" name="id">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="121" parent="91" name="list_id">
+      <Position>2</Position>
+      <DataType>varchar(100 char)|0s</DataType>
+    </column>
+    <column id="122" parent="91" name="login_user">
+      <Position>3</Position>
+      <DataType>varchar(100 char)|0s</DataType>
+    </column>
+    <column id="123" parent="91" name="sender">
+      <Position>4</Position>
+      <DataType>varchar(1000 char)|0s</DataType>
+    </column>
+    <column id="124" parent="91" name="receiver">
+      <Position>5</Position>
+      <DataType>varchar(1000 char)|0s</DataType>
+    </column>
+    <column id="125" parent="91" name="content">
+      <Position>6</Position>
+      <DataType>varchar(8000 char)|0s</DataType>
+    </column>
+    <column id="126" parent="91" name="send_date">
+      <Position>7</Position>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="127" parent="91" name="project_code">
+      <Position>8</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <index id="128" parent="91" name="PK__CONTACT___3213E83FF9490028">
+      <Position>1</Position>
+      <ColNames>id</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="129" parent="91" name="PK__CONTACT___3213E83FF9490028">
+      <ObjectId>418100530</ObjectId>
+      <CreatedTimestamp>2022-11-17.05:25:31.343</CreatedTimestamp>
+      <ModifiedTimestamp>2022-11-17.05:25:31.343</ModifiedTimestamp>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>PK__CONTACT___3213E83FF9490028</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="130" parent="92" name="id">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="131" parent="92" name="project_code">
+      <Position>2</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="132" parent="92" name="type_name">
+      <Position>3</Position>
+      <DataType>varchar(4000 char)|0s</DataType>
+    </column>
+    <column id="133" parent="92" name="sender">
+      <Position>4</Position>
+      <DataType>varchar(100 char)|0s</DataType>
+    </column>
+    <column id="134" parent="92" name="content">
+      <Position>5</Position>
+      <DataType>varchar(4000 char)|0s</DataType>
+    </column>
+    <column id="135" parent="92" name="cmstype">
+      <Position>6</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <index id="136" parent="92" name="PK__CONTACT___3213E83F89832F73">
+      <Position>1</Position>
+      <ColNames>id</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="137" parent="92" name="PK__CONTACT___3213E83F89832F73">
+      <ObjectId>194099732</ObjectId>
+      <CreatedTimestamp>2022-08-09.23:38:17.797</CreatedTimestamp>
+      <ModifiedTimestamp>2022-08-09.23:38:17.797</ModifiedTimestamp>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>PK__CONTACT___3213E83F89832F73</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="138" parent="93" name="id">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="139" parent="93" name="project_code">
+      <Position>2</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="140" parent="93" name="type_code">
+      <Position>3</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="141" parent="93" name="type_name">
+      <Position>4</Position>
+      <DataType>varchar(4000 char)|0s</DataType>
+    </column>
+    <column id="142" parent="93" name="cmstype">
+      <Position>5</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="143" parent="93" name="filename">
+      <Position>6</Position>
+      <DataType>varchar(4000 char)|0s</DataType>
+    </column>
+    <column id="144" parent="93" name="deleteYn">
+      <Position>7</Position>
+      <DefaultConstraintName>DF__CONTACT_M__delet__03F0984C</DefaultConstraintName>
+      <DefaultExpression>&apos;N&apos;</DefaultExpression>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <index id="145" parent="93" name="PK__CONTACT___3213E83F71E04356">
+      <Position>1</Position>
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="146" parent="93" name="PK__CONTACT___3213E83F71E04356">
+      <ObjectId>50099219</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2022-05-23.23:09:28.503</CreatedTimestamp>
+      <ModifiedTimestamp>2022-05-23.23:09:28.503</ModifiedTimestamp>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>PK__CONTACT___3213E83F71E04356</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <default id="147" parent="93" name="DF__CONTACT_M__delet__03F0984C">
+      <ObjectId>66099276</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2022-05-23.23:09:28.503</ModifiedTimestamp>
+      <ColNames>deleteYn</ColNames>
+      <DefaultExpression>&apos;N&apos;</DefaultExpression>
+    </default>
+    <column id="148" parent="94" name="id">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="149" parent="94" name="project_code">
+      <Position>2</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="150" parent="94" name="type_code">
+      <Position>3</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="151" parent="94" name="type_name">
+      <Position>4</Position>
+      <DataType>varchar(4000 char)|0s</DataType>
+    </column>
+    <column id="152" parent="94" name="cmstype">
+      <Position>5</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="153" parent="94" name="content">
+      <Position>6</Position>
+      <DataType>varchar(4000 char)|0s</DataType>
+    </column>
+    <column id="154" parent="94" name="username">
+      <Position>7</Position>
+      <DataType>varchar(300 char)|0s</DataType>
+    </column>
+    <column id="155" parent="94" name="insert_date">
+      <Position>8</Position>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <index id="156" parent="94" name="PK__CONTACT___3213E83FE4292CA6">
+      <Position>1</Position>
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="157" parent="94" name="PK__CONTACT___3213E83FE4292CA6">
+      <ObjectId>162099618</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2022-05-23.23:09:49</CreatedTimestamp>
+      <ModifiedTimestamp>2022-05-23.23:09:49</ModifiedTimestamp>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>PK__CONTACT___3213E83FE4292CA6</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="158" parent="95" name="id">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="159" parent="95" name="project_code">
+      <Position>2</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="160" parent="95" name="type_code">
+      <Position>3</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="161" parent="95" name="type_name">
+      <Position>4</Position>
+      <DataType>varchar(4000 char)|0s</DataType>
+    </column>
+    <column id="162" parent="95" name="cmstype">
+      <Position>5</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="163" parent="95" name="vcode">
+      <Position>6</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <index id="164" parent="95" name="PK__CONTACT___3213E83F56CAF806">
+      <Position>1</Position>
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="165" parent="95" name="PK__CONTACT___3213E83F56CAF806">
+      <ObjectId>130099504</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2022-05-23.23:09:44.880</CreatedTimestamp>
+      <ModifiedTimestamp>2022-05-23.23:09:44.880</ModifiedTimestamp>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>PK__CONTACT___3213E83F56CAF806</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="166" parent="96" name="id">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="167" parent="96" name="list_id">
+      <Position>2</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="168" parent="96" name="login_user">
+      <Position>3</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="169" parent="96" name="list_type">
+      <Position>4</Position>
+      <DataType>varchar(500 char)|0s</DataType>
+    </column>
+    <column id="170" parent="96" name="before_data">
+      <Position>5</Position>
+      <DataType>varchar(500 char)|0s</DataType>
+    </column>
+    <column id="171" parent="96" name="after_data">
+      <Position>6</Position>
+      <DataType>varchar(500 char)|0s</DataType>
+    </column>
+    <column id="172" parent="96" name="modify_date">
+      <Position>7</Position>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="173" parent="96" name="project_code">
+      <Position>8</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <index id="174" parent="96" name="PK__CONTACT___3213E83FC2C8A755">
+      <Position>1</Position>
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="175" parent="96" name="PK__CONTACT___3213E83FC2C8A755">
+      <ObjectId>1269579561</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2022-02-20.23:00:26.420</CreatedTimestamp>
+      <ModifiedTimestamp>2022-02-20.23:00:26.420</ModifiedTimestamp>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>PK__CONTACT___3213E83FC2C8A755</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="176" parent="97" name="code">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="177" parent="97" name="name">
+      <Position>2</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="178" parent="97" name="intranet_link">
+      <Position>3</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="179" parent="97" name="kon_link">
+      <Position>4</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="180" parent="97" name="create_date">
+      <Position>5</Position>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="181" parent="97" name="delete_date">
+      <Position>6</Position>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="182" parent="97" name="project_end_yn">
+      <Position>7</Position>
+      <DataType>varchar(10 char)|0s</DataType>
+    </column>
+    <index id="183" parent="97" name="PK__contact___357D4CF8702BA2A3">
+      <Position>1</Position>
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>code</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="184" parent="97" name="PK__contact___357D4CF8702BA2A3">
+      <ObjectId>917578307</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-08-19.23:54:49.127</CreatedTimestamp>
+      <ModifiedTimestamp>2021-08-19.23:54:49.127</ModifiedTimestamp>
+      <ColNames>code</ColNames>
+      <UnderlyingIndexName>PK__contact___357D4CF8702BA2A3</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="185" parent="98" name="id">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="186" parent="98" name="list_id">
+      <Position>2</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="187" parent="98" name="login_user">
+      <Position>3</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="188" parent="98" name="result_code">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="189" parent="98" name="content">
+      <Position>5</Position>
+      <DataType>varchar(300 char)|0s</DataType>
+    </column>
+    <column id="190" parent="98" name="result_date">
+      <Position>6</Position>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="191" parent="98" name="project_code">
+      <Position>7</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <index id="192" parent="98" name="PK__CONTACT___3213E83F8E9A29D0">
+      <Position>1</Position>
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="193" parent="98" name="PK__CONTACT___3213E83F8E9A29D0">
+      <ObjectId>1365579903</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2022-02-21.20:52:01.240</CreatedTimestamp>
+      <ModifiedTimestamp>2022-02-21.20:52:01.240</ModifiedTimestamp>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>PK__CONTACT___3213E83F8E9A29D0</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="194" parent="99" name="id">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="195" parent="99" name="list_id">
+      <Position>2</Position>
+      <DataType>varchar(100 char)|0s</DataType>
+    </column>
+    <column id="196" parent="99" name="login_user">
+      <Position>3</Position>
+      <DataType>varchar(100 char)|0s</DataType>
+    </column>
+    <column id="197" parent="99" name="receiver">
+      <Position>4</Position>
+      <DataType>varchar(1000 char)|0s</DataType>
+    </column>
+    <column id="198" parent="99" name="content">
+      <Position>5</Position>
+      <DataType>varchar(8000 char)|0s</DataType>
+    </column>
+    <column id="199" parent="99" name="send_date">
+      <Position>6</Position>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="200" parent="99" name="project_code">
+      <Position>7</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="201" parent="100" name="id">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="202" parent="100" name="list_id">
+      <Position>2</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="203" parent="100" name="contact_stat">
+      <Position>3</Position>
+      <DataType>varchar(10 char)|0s</DataType>
+    </column>
+    <column id="204" parent="100" name="contact_name">
+      <Position>4</Position>
+      <DataType>varchar(100 char)|0s</DataType>
+    </column>
+    <column id="205" parent="100" name="contact_time">
+      <Position>5</Position>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="206" parent="100" name="project_code">
+      <Position>6</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <index id="207" parent="100" name="PK__CONTACT___3213E83F5BE53104">
+      <Position>1</Position>
+      <ColNames>id</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="208" parent="100" name="PK__CONTACT___3213E83F5BE53104">
+      <ObjectId>466100701</ObjectId>
+      <CreatedTimestamp>2023-01-17.01:26:05.160</CreatedTimestamp>
+      <ModifiedTimestamp>2023-01-17.01:26:05.160</ModifiedTimestamp>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>PK__CONTACT___3213E83F5BE53104</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="209" parent="101" name="id">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="210" parent="101" name="Dorder">
+      <Position>2</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="211" parent="101" name="code">
+      <Position>3</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="212" parent="101" name="name">
+      <Position>4</Position>
+      <DataType>varchar(100 char)|0s</DataType>
+    </column>
+    <column id="213" parent="101" name="header">
+      <Position>5</Position>
+      <DataType>varchar(100 char)|0s</DataType>
+    </column>
+    <column id="214" parent="101" name="project_code">
+      <Position>6</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="215" parent="102" name="id">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="216" parent="102" name="type_value">
+      <Position>2</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="217" parent="102" name="setting_time">
+      <Position>3</Position>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="218" parent="102" name="project_code">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <index id="219" parent="102" name="PK__EMAIL_VA__3213E83F7240923A">
+      <Position>1</Position>
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="220" parent="102" name="PK__EMAIL_VA__3213E83F7240923A">
+      <ObjectId>1493580359</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2022-03-22.20:32:57.380</CreatedTimestamp>
+      <ModifiedTimestamp>2022-03-22.20:32:57.380</ModifiedTimestamp>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>PK__EMAIL_VA__3213E83F7240923A</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="221" parent="103" name="id">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="222" parent="103" name="type_code">
+      <Position>2</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="223" parent="103" name="project_code">
+      <Position>3</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <index id="224" parent="103" name="PK__KON_LINK__3213E83F4417916C">
+      <Position>1</Position>
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="225" parent="103" name="PK__KON_LINK__3213E83F4417916C">
+      <ObjectId>1093578934</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-08-21.20:27:55.307</CreatedTimestamp>
+      <ModifiedTimestamp>2021-08-21.20:27:55.307</ModifiedTimestamp>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>PK__KON_LINK__3213E83F4417916C</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="226" parent="104" name="id">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="227" parent="104" name="list_id">
+      <Position>2</Position>
+      <DataType>varchar(100 char)|0s</DataType>
+    </column>
+    <column id="228" parent="104" name="list_data">
+      <Position>3</Position>
+      <DataType>varchar(300 char)|0s</DataType>
+    </column>
+    <column id="229" parent="104" name="list_type">
+      <Position>4</Position>
+      <DataType>varchar(100 char)|0s</DataType>
+    </column>
+    <column id="230" parent="104" name="list_order">
+      <Position>5</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="231" parent="104" name="project_code">
+      <Position>6</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="232" parent="105" name="id">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="233" parent="105" name="name">
+      <Position>2</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="234" parent="105" name="type">
+      <Position>3</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="235" parent="105" name="division_status">
+      <Position>4</Position>
+      <DataType>varchar(10 char)|0s</DataType>
+    </column>
+    <column id="236" parent="105" name="list_order">
+      <Position>5</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="237" parent="105" name="project_code">
+      <Position>6</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <index id="238" parent="105" name="PK__LIST_TYP__3213E83FFFE3D758">
+      <Position>1</Position>
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="239" parent="105" name="PK__LIST_TYP__3213E83FFFE3D758">
+      <ObjectId>1301579675</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2022-02-21.00:21:52.180</CreatedTimestamp>
+      <ModifiedTimestamp>2022-02-21.00:21:52.180</ModifiedTimestamp>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>PK__LIST_TYP__3213E83FFFE3D758</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="240" parent="106" name="id">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="241" parent="106" name="project_code">
+      <Position>2</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="242" parent="106" name="loginUser_name">
+      <Position>3</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="243" parent="106" name="loginUser_email">
+      <Position>4</Position>
+      <DataType>varchar(100 char)|0s</DataType>
+    </column>
+    <column id="244" parent="106" name="description">
+      <Position>5</Position>
+      <DataType>varchar(500 char)|0s</DataType>
+    </column>
+    <column id="245" parent="106" name="create_time">
+      <Position>6</Position>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <index id="246" parent="106" name="PK__PROJECT___3213E83F1BDBC696">
+      <Position>1</Position>
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="247" parent="106" name="PK__PROJECT___3213E83F1BDBC696">
+      <ObjectId>1013578649</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2021-08-19.23:55:41.443</CreatedTimestamp>
+      <ModifiedTimestamp>2021-08-19.23:55:41.443</ModifiedTimestamp>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>PK__PROJECT___3213E83F1BDBC696</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="248" parent="107" name="id">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="249" parent="107" name="code">
+      <Position>2</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="250" parent="107" name="name">
+      <Position>3</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="251" parent="107" name="project_code">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="252" parent="108" name="id">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="253" parent="108" name="type_value">
+      <Position>2</Position>
+      <DataType>varchar(50 char)|0s</DataType>
+    </column>
+    <column id="254" parent="108" name="setting_time">
+      <Position>3</Position>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="255" parent="108" name="project_code">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <index id="256" parent="108" name="PK__SMS_VARI__3213E83FBA56D263">
+      <Position>1</Position>
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="257" parent="108" name="PK__SMS_VARI__3213E83FBA56D263">
+      <ObjectId>1525580473</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <CreatedTimestamp>2022-03-22.20:33:01.143</CreatedTimestamp>
+      <ModifiedTimestamp>2022-03-22.20:33:01.143</ModifiedTimestamp>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>PK__SMS_VARI__3213E83FBA56D263</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <argument id="258" parent="109" name="@PKEY">
+      <Position>1</Position>
+      <DataType>nvarchar(max)|0s</DataType>
+    </argument>
+  </database-model>
+</dataSource>
