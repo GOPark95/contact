@@ -232,4 +232,9 @@ public class ContactServiceImpl implements ContactService{
         return contactDao.GetSmsLog(sqlSession3, ld);
     }
 
+    @Override
+    public int statusUpdate(HashMap<String, String> hs) {
+        return contactDao.statusUpdate(sqlSession3, hs);
+    }
+
 }

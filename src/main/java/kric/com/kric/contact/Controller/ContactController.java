@@ -28,12 +28,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.lang.reflect.Array;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -102,7 +106,8 @@ public class ContactController {
                              @RequestParam(value = "type_data", required = false) String type_data,
                              @RequestParam(value = "Listid_arr", required = false) ArrayList<String> listid_arr,
                              @RequestParam(value = "konType", required = false) ArrayList<String> konType,
-                             HttpSession sess
+                             HttpSession sess,
+                             HttpServletRequest req, HttpServletResponse res
     ) throws Exception {
 
         UserVo loginUser = (UserVo) sess.getAttribute("loginUser");
@@ -159,7 +164,7 @@ public class ContactController {
             int result = cService.ContactInsert(cp, rlist, dlist, Llist, tlist, listid_arr, konType);
             String projectCode = cService.ContactLastCode();
 
-            if (konCode != null) KonSetting(konCode, konType, projectCode);
+            if (konCode != null) KonSetting(konCode, konType, projectCode, req, res);
             cService.ContactProjectLog(loginUser, "프로젝트 추가");
             return 1;
         } catch (Exception e) {
@@ -358,15 +363,21 @@ public class ContactController {
     @RequestMapping("KonSetting")
     public String KonSetting(@RequestParam(value = "konCode") String konCode,
                              @RequestParam(value = "konType[]") ArrayList<String> konType,
-                             @RequestParam(value = "projectCode") String pcode
+                             @RequestParam(value = "projectCode") String pcode,
+                             HttpServletRequest req, HttpServletResponse res
     ) throws IOException {
-        //D:\workspace\kon
+
+//        res.setContentType("text/html; charset=UTF-8");
+//        res.setCharacterEncoding("UTF-8");
+
         String dir = "D:\\KON_D\\project\\" + konCode + "\\SurveyEnd.asp";
         String originalDir = "D:\\KON_D\\project\\" + konCode + "\\SurveyEnd_original.asp";
         String newDir = "D:\\KON_D\\project\\" + konCode + "\\SurveyEnd_copy.asp";
+
         File endPage = new File(dir);
         File original = new File(originalDir);
         File newEndPage = new File(newDir);
+
         if (!original.exists()) {
             FileCopyUtils.copy(endPage, original);
         }
@@ -375,59 +386,66 @@ public class ContactController {
             newEndPage.createNewFile();
         }
 
-        BufferedReader reader = new BufferedReader(new FileReader(original));
-        PrintWriter writer = new PrintWriter(new FileWriter(newEndPage));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(original), StandardCharsets.UTF_8));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(newEndPage), StandardCharsets.UTF_8));
+//        PrintWriter writer = new PrintWriter(bw);
         String str, query;
 
         while ((str = reader.readLine()) != null) {
 
             if ("IF PAGENAME = \"END\" or PAGENAME = \"SCREEN\" or PAGENAME = \"QUOTA\" THEN".equals(str.trim())) {
-                writer.println("\tDim SQL, Rcset, cnt\n");
+                bw.write("\tDim SQL, Rcset, cnt\n");
 //                writer.println(str);
             }
             if ("<%IF PAGENAME = \"END\"  THEN%>".equals(str.trim())) {
 
-                writer.println(str);
+                bw.write(str + "\n");
                 if (!konType.get(0).equals("")) {
                     query = "";
                     query += "\t\t\t\t\t\t\t\t\t<%\n";
-                    query += "\t\t\t\t\t\t\t\t\t\tSQL = \" update Contact.dbo.CONTACT_STATUS set Cresult = '" + konType.get(0) + "', Ctime = getdate() where project_code = '" + pcode + "' and list_id = '\" & IDKEY & \"'\"\n";
+                    query += "\t\t\t\t\t\t\t\t\tCall DBConnect2()\n";
+                    query += "\t\t\t\t\t\t\t\t\t\tSQL = \" update Contact.dbo.CONTACT_STATUS set contact_stat = '" + konType.get(0) + "', contact_time = getdate() where project_code = '" + pcode + "' and list_id = '\" & IDKEY & \"'\"\n";
                     query += "\t\t\t\t\t\t\t\t\t\tDBConn.Execute SQL, cnt\n";
+                    query += "\t\t\t\t\t\t\t\t\tCall DBClose()\n";
                     query += "\t\t\t\t\t\t\t\t\t%>";
 
-                    writer.println(query);
+                    bw.write(query + "\n");
                 }
             } else if ("<%ELSEIF PAGENAME = \"SCREEN\" THEN%>".equals(str.trim())) {
-                writer.println(str);
+                bw.write(str + "\n");
                 if (!konType.get(1).equals("")) {
                     query = "";
                     query += "\t\t\t\t\t\t\t\t\t<%\n";
-                    query += "\t\t\t\t\t\t\t\t\t\tSQL = \" update Contact.dbo.CONTACT_STATUS set Cresult = '" + konType.get(1) + "', Ctime = getdate() where project_code = '" + pcode + "' and list_id = '\" & IDKEY & \"'\"\n";
+                    query += "\t\t\t\t\t\t\t\t\tCall DBConnect2()\n";
+                    query += "\t\t\t\t\t\t\t\t\t\tSQL = \" update Contact.dbo.CONTACT_STATUS set contact_stat = '" + konType.get(1) + "', contact_time = getdate() where project_code = '" + pcode + "' and list_id = '\" & IDKEY & \"'\"\n";
                     query += "\t\t\t\t\t\t\t\t\t\tDBConn.Execute SQL, cnt\n";
+                    query += "\t\t\t\t\t\t\t\t\tCall DBClose()\n";
                     query += "\t\t\t\t\t\t\t\t\t%>";
 
-                    writer.println(query);
+                    bw.write(query + "\n");
                 }
 
             } else if ("<%ELSEIF PAGENAME = \"QUOTA\" THEN%>".equals(str.trim())) {
-                writer.println(str);
+                bw.write(str + "\n");
                 if (!konType.get(2).equals("")) {
                     query = "";
                     query += "\t\t\t\t\t\t\t\t\t<%\n";
-                    query += "\t\t\t\t\t\t\t\t\t\tSQL = \" update Contact.dbo.CONTACT_STATUS set Cresult = '" + konType.get(2) + "', Ctime = getdate() where project_code = '" + pcode + "' and list_id = '\" & IDKEY & \"'\"\n";
+                    query += "\t\t\t\t\t\t\t\t\tCall DBConnect2()\n";
+                    query += "\t\t\t\t\t\t\t\t\t\tSQL = \" update Contact.dbo.CONTACT_STATUS set contact_stat = '" + konType.get(2) + "', contact_time = getdate() where project_code = '" + pcode + "' and list_id = '\" & IDKEY & \"'\"\n";
                     query += "\t\t\t\t\t\t\t\t\t\tDBConn.Execute SQL, cnt\n";
+                    query += "\t\t\t\t\t\t\t\t\tCall DBClose()\n";
                     query += "\t\t\t\t\t\t\t\t\t%>";
 
-                    writer.println(query);
+                    bw.write(query + "\n");
                 }
             } else {
-                writer.println(str);
+                bw.write(str + "\n");
             }
 
-            writer.flush();
+            bw.flush();
         }
 
-        writer.close();
+        bw.close();
         reader.close();
 
         if (endPage.exists()) {
@@ -453,11 +471,12 @@ public class ContactController {
                               @RequestParam(value = "konCode", required = false) String konCode,
                               @RequestParam(value = "description", required = false) String description,
                               @RequestParam(value = "konType", required = false) ArrayList<String> konType,
+                              HttpServletRequest req, HttpServletResponse res,
                               HttpSession sess) throws IOException {
         UserVo loginUser = (UserVo) sess.getAttribute("loginUser");
 
         int result = cService.Modify_KonLinkCode(pcode, konType, konCode);
-        KonSetting(konCode, konType, pcode);
+        KonSetting(konCode, konType, pcode, req, res);
         cService.ContactProjectLog(loginUser, description);
         return result;
     }
@@ -919,6 +938,27 @@ public class ContactController {
 
         return result;
     }
+    
+    //프로젝트 상태값 변경
+    @ResponseBody
+    @RequestMapping("status_update")
+    public int statusUpdate(@RequestParam("prjCode") String prjCode,
+                            @RequestParam("status") String status,
+                            @RequestParam("description") String description,
+                            HttpSession sess) {
+
+        UserVo loginUser = (UserVo) sess.getAttribute("loginUser");
+
+        HashMap<String, String> hs = new HashMap<>();
+        hs.put("prjCode", prjCode);
+        hs.put("status", status);
+
+        int result = cService.statusUpdate(hs);
+        cService.ContactProjectLog(loginUser, description);
+
+        return 1;
+    }
+    
 }
 
 

@@ -717,4 +717,8 @@
         WHERE A.project_code = #{prj_code} and A.list_id = #{list_id}
         ORDER BY A.id DESC
     </select>
+
+    <update id="statusUpdate">
+        UPDATE CONTACT_PROJECT SET project_end_yn = #{status} WHERE code = #{prjCode}
+    </update>
 </mapper>

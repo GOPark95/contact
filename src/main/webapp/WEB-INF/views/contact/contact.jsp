@@ -13,6 +13,7 @@
         <jsp:include page="../common/headTag.jsp"/>
         <link href=" /resources/css/common/header.css" rel="stylesheet" />
         <link href=" /resources/css/contact/contact.css" rel="stylesheet">
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     </head>
     <body>
         <div class="flex_container">
@@ -308,7 +309,7 @@
                                                 <c:choose>
                                                     <c:when test="${empty sslList}">
                                                         <tr>
-                                                            <td colspan="3">이메일 발송기록이 존재하지 않습니다.</td>
+                                                            <td colspan="3">문자 발송기록이 존재하지 않습니다.</td>
                                                         </tr>
                                                     </c:when>
                                                     <c:otherwise>

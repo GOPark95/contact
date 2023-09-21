@@ -88,7 +88,7 @@ $(function(){
         
         //초기화
         $(".project_box .selectBox > input").val("타입을 선택해주세요.").attr("data-code", "").attr("data-title", "");
-        $("input[name=typeName], input[name=sender], #uploadFile, #deleteFile").val("");
+        $("input[name=typeName], #emailBox input[name=sender], #uploadFile, #deleteFile").val("");
         $(".project_info ul").hide();
         emailEditor.setData('');
         smsEditor.setData('');
@@ -183,7 +183,7 @@ $(function(){
                 emailEditor.setData('');
                 // console.log(emailEditor.getData());
             }else{
-                $("#smsBox input[name=typeName], #smsBox input[name=sender]").val('');
+                $("#smsBox input[name=typeName], #smsBox input[name=sender]").val('02-6009-2750');
                 $("#smsBox input[name=variable]").prop("checked", false);
                 smsEditor.setData('');
                 // console.log(smsEditor.getData());
@@ -235,7 +235,7 @@ $(function(){
                         emailEditor.setData(data.csList[0].content);
                     }else{
                         $("#smsBox input[name=typeName]").val(data.csList[0].name);
-                        $("#smsBox input[name=sender]").val(data.csList[0].sender);
+                        $("#smsBox input[name=sender]").val("02-6009-2750");
                         $.each(data.csVariList, function(i, e){
                             if(e.chkYN == "Y") $("#smsBox input[name=variable][value="+e.code+"]").prop("checked", true);
                             else $("#smsBox input[name=variable][value="+e.code+"]").prop("checked", false);
@@ -501,6 +501,14 @@ $(function(){
                 return false;
             }
         })
+    })
+
+    //SMS 문자 체크
+    $(document).on("keyup change", "#smsBox .ck-content", function(){
+        var textLen = smsEditor.getData().replace(/(<([^>]+)>)/ig,"").length;
+        console.log(smsEditor.getData(), smsEditor.getData().replace(/(<([^>]+)>)/ig,""), textLen)
+
+        $("#contentLength").text(textLen);
     })
 
     //프로젝트 코드 있으면 세팅

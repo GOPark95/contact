@@ -43,18 +43,13 @@
 
                                     </div>
                                     <div class="project_name">
-                                        <p class="title">타입명</p>
+                                        <p class="title">이메일 제목</p>
                                         <input type="text" name="typeName">
                                     </div>
                                     <div class="project_name">
                                         <p class="title">이메일에 사용할 변수 리스트</p>
                                         <div class="text_flied variableForm">
                                             <div class="variableHeader"><p>변수명</p><p>사용변수</p></div>
-    <%--                                        <div class="variableList"><p>리스트아이디</p><p>[#리스트아이디#]</p></div>--%>
-    <%--                                        <div class="variableList"><p>혈액형</p><p>[#혈액형#]</p></div>--%>
-    <%--                                        <div class="variableList"><p>혈액형</p><p>[#혈액형#]</p></div>--%>
-    <%--                                        <div class="variableList"><p>혈액형</p><p>[#혈액형#]</p></div>--%>
-    <%--                                        <div class="variableList"><p>혈액형</p><p>[#혈액형#]</p></div>--%>
                                         </div>
                                     </div>
                                     <div class="project_name">
@@ -103,13 +98,14 @@
                                             <div class="variableHeader"><p>변수명</p><p>사용변수</p></div>
                                         </div>
                                     </div>
-<%--                                    <div class="project_name">--%>
-<%--                                        <p class="title">발신자 전화번호</p>--%>
-<%--                                        <input type="text" name="sender">--%>
-<%--                                    </div>--%>
+                                    <div class="project_name">
+                                        <p class="title">발신자 전화번호</p>
+                                        <input type="text" name="sender" value="02-6009-2750" readonly >
+                                    </div>
                                     <div class="project_name">
                                         <p class="title">문자 내용</p>
                                         <textarea id="smsContent"></textarea>
+                                        <p class="contentLengthForm"><span id="contentLength">0</span> / 2000</p>
                                     </div>
                                 </div>
                                 <div class="btn_box center">

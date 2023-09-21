@@ -1062,4 +1062,34 @@ $(function () {
     })
 
     /******************************* 프로젝트 정보 수정 END*******************************/
+
+    /******************************* 프로젝트 상태값 변경*******************************/
+    $(".project_success, .project_delete").on("click", function(){
+        var projectCode = $(".list_selected td:first").text();
+        var chkValue = $(this).hasClass("project_success") == true ? "C" : "Y";
+        var logText = $(this).hasClass("project_success") == true ? "프로젝트 완료처리" : "프로젝트 삭제처리";
+
+        var formData = new FormData();
+        formData.append("prjCode", projectCode);
+        formData.append("status", chkValue);
+        formData.append("description", logText);
+
+        $.ajax({
+            url: "/contactProject/status_update",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                console.log(data)
+                if (data == 1) {
+                    alert("프로젝트 정보 수정되었습니다.");
+                    location.reload();
+                }else{
+                    alert("프로젝트 정보 수정 중 오류 발생했습니다.\n개발그룹에 문의 부탁드립니다.")
+                }
+            }
+        })
+    })
+    /******************************* 프로젝트 상태값 변경 END*******************************/
 })

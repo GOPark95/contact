@@ -293,5 +293,9 @@ public class ContactDao {
     public ArrayList<SendSmsLogVo> GetSmsLog(SqlSessionTemplate sqlSession3, ListDataVo ld) {
         return (ArrayList)sqlSession3.selectList("contactMapper.GetSmsLog", ld);
     }
+
+    public int statusUpdate(SqlSessionTemplate sqlSession3, HashMap<String, String> hs) {
+        return sqlSession3.update("contactMapper.statusUpdate", hs);
+    }
 }
 

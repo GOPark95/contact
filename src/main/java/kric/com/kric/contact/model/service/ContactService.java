@@ -85,6 +85,8 @@ public interface ContactService {
     void ProgressContactReset(UserVo loginUser);
 
     ArrayList<SendSmsLogVo> GetSmsLog(ListDataVo ld);
+
+    int statusUpdate(HashMap<String, String> hs);
 }
 
 

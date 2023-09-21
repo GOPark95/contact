@@ -142,6 +142,7 @@
                                     </div>
                                 </div>
                                 <div class="btn_box center">
+                                    <button class="square_btn line project_success">프로젝트 완료</button>
                                     <button class="square_btn line project_delete">프로젝트 삭제</button>
                                     <button class="square_btn default project_modify">수정</button>
                                     <!-- <button class="square_btn default">등록</button> -->
