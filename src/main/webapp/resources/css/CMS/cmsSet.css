@@ -42,9 +42,12 @@ section.ct01 .wrap > div { width: 50%; }
 .project_box .btn_box .line.option { color: #999; border: 1px solid #999; border-radius: 52px; padding-left: 16px; line-height: 30px; background: url(../../images/option.png) no-repeat 20px 10px/12px 14px; }
 .project_txt .project_name { margin-bottom: 12px; }
 .project_txt .project_name p { font-size: 16px; font-weight: 700; color: #666; margin-bottom: 4px;}
-.project_txt .project_name input { width: 100%; background-color: #fff;;}
+.project_txt .project_name input { width: 100%; background-color: #fff;}
 .btn_box .center {text-align: center;}
 #smsBox .btn_box .center {margin-top: 20px;}
+#smsBox input[name=sender] {background: #efefef;}
+.contentLengthForm {float: right}
+#contentLength {font-weight: bold;}
 
 /* Section : CT02 */
 
@@ -113,7 +116,7 @@ footer { z-index: 999; }
 /*에디터*/
 .ck-content, .ck-content > p { color: #000!important; font-weight: 100!important; }
 .ck-content { height: 200px; }
-#smsBox .ck-content { height: 310px; }
+#smsBox .ck-content { height: 240px; }
 
 /*파일 업로드 팝업*/
 .filePopupWrap { position: fixed; bottom: 0; right: 0; z-index: 9999; width: calc(100% - 168px)!important; height: calc(100% - 60px)!important; background: rgba(0, 0, 0, 0.7); display: flex; justify-content: center; align-items: center; }

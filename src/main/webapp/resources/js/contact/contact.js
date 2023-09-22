@@ -14,7 +14,7 @@ function dataSetting(prjCode, listId, alertText){
             xmlHttpRequest.setRequestHeader("AJAX", "true");
         },
         success: function(result2) {
-            // console.log(result2)
+            console.log(result2)
             alert(alertText);
             $("#infoModifyBtn").show();
             $("#modifySave, #modifyCancel").hide();
@@ -28,17 +28,25 @@ function dataSetting(prjCode, listId, alertText){
 
             //수정 로그
             $("#infoModify_logTable table tbody").html('');
-            $.each(result2.cmList, function(i, e){
-                $("#infoModify_logTable table tbody").append("<tr><td>"+e.modify_date+"</td><td>"+e.list_type+"</td><td>"+e.before_data+"</td><td>"+e.after_data+"</td></tr>")
-            })
+            if(result2.cmList.length > 0){
+                $.each(result2.cmList, function(i, e){
+                    $("#infoModify_logTable table tbody").append("<tr><td>"+e.modify_date+"</td><td>"+e.list_type+"</td><td>"+e.before_data+"</td><td>"+e.after_data+"</td></tr>")
+                })
+            }else{
+                $("#infoModify_logTable table tbody").append("<tr><td colspan='3'>수정로그가 존재하지 않습니다.</td></tr>");
+            }
             
             //결과로그
             $("#RESULT_LIST").val('결과코드를 선택해주세요.').attr("data-code", "").attr("data-title", "");
             $("textarea[name=resultText]").val('');
             $("#resultCode_logTable table tbody").html('');
-            $.each(result2.rlList, function(i, e){
-                $("#resultCode_logTable table tbody").append("<tr><td>"+e.result_date+"</td><td>"+e.name+"</td><td>"+e.resultCode+"</td><td>"+e.content+"</td></tr>")
-            })
+            if(result2.rlList.length > 0){
+                $.each(result2.rlList, function(i, e){
+                    $("#resultCode_logTable table tbody").append("<tr><td>"+e.result_date+"</td><td>"+e.name+"</td><td>"+e.resultCode+"</td><td>"+e.content+"</td></tr>")
+                })
+            }else{
+                $("#infoModify_logTable table tbody").append("<tr><td colspan='3'>결과로그가 존재하지 않습니다.</td></tr>");
+            }
             
             //이메일 수정
             $("#emailList ~ ul").html('');
@@ -57,9 +65,12 @@ function dataSetting(prjCode, listId, alertText){
             }
 
             //전화번호 수정
-            $("#phoneList ~ ul").html('');
+            $("#phoneList ~ ul, #smsList ~ ul").html('');
             $.each(result2.dList, function(i, e){
-                if(e.list_type == "전화번호") $("#phoneList ~ ul").append("<li><a class='link-select' data-code='"+e.list_data+"' data-title='"+e.list_data+"'>"+e.list_data+"</a></li>");
+                if(e.list_type == "전화번호") {
+                    $("#phoneList ~ ul").append("<li><a class='link-select' data-code='"+e.list_data+"' data-title='"+e.list_data+"'>"+e.list_data+"</a></li>");
+                    $("#smsList ~ ul").append("<li><a class='link-select' data-code='"+e.list_data+"' data-title='"+e.list_data+"'>"+e.list_data+"</a></li>");
+                }
             })
             
             //전화 로그
@@ -70,6 +81,16 @@ function dataSetting(prjCode, listId, alertText){
                 })
             }else{
                 $("#call_logTable table tbody").append("<tr><td colspan='3'>통화기록이 존재하지 않습니다.</td></tr>");
+            }
+            
+            //문자 발송로그
+            $("#sms_logTable table tbody").html('');
+            if(result2.sslList.length > 0){
+                $.each(result2.sslList, function(i, e){
+                    $("#sms_logTable table tbody").append("<tr><td>"+e.send_date+"</td><td>"+e.receiver+"</td></tr>");
+                })
+            }else{
+                $("#sms_logTable table tbody").append("<tr><td colspan='2'>문자 발송기록이 존재하지 않습니다.</td></tr>");
             }
 
         },error: function(xhr, status, error){
@@ -581,7 +602,7 @@ $(function(){
 
     function Connect() {
         var prjCode = window.location.href.split("/")[window.location.href.split("/").length-2];
-        wsocket = new WebSocket("ws://1.235.195.3:2302");
+        wsocket = new WebSocket("ws://10.10.11.68:2302");
 
         wsocket.onopen = function () {
             console.log("wsocket connected !");
