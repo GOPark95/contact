@@ -96,7 +96,21 @@ $(function(){
         $("#PROJECT_LIST ~ ul .link-select[data-code="+sessionStorage.getItem("select_prjCode")+"]").click();
     }
 
+    $("#spListAdd_hide").on("click", function (){
+        $("#listAdd_form").find(".project_txt").hide();
+        $("#divShowListAdd").hide();
+        $("#divHideListAdd").show();
+        $("#listAdd_form").css("width","3%");
+        $("#currentList_form").css("width","97%");
+    })
 
+    $("#spListAdd_show").on("click", function (){
+        $("#listAdd_form").find(".project_txt").show();
+        $("#divHideListAdd").hide();
+        $("#divShowListAdd").show();
+        $("#listAdd_form").css("width","");
+        $("#currentList_form").css("width","");
+    })
     //추가하기 클릭시
     $("#fileUpload").on("click", function(){
         $("#uploadFile").click();

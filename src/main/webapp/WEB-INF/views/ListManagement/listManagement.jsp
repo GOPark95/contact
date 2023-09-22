@@ -27,8 +27,11 @@
                     <div class="wrap">
                         <div class="project_info" id="listAdd_form">
                             <div class="project_box">
-                                <div class="project_title">
-                                    <p>리스트 추가</p>
+                                <div class="project_title" id="divShowListAdd">
+                                    <p>리스트 추가<span id="spListAdd_hide" style="float: right">접기</span></p>
+                                </div>
+                                <div class="project_title" id="divHideListAdd">
+                                    <p><span id="spListAdd_show" style="float: right">펼치기</span></p>
                                 </div>
                                 <div class="project_txt">
                                     <div class="btn_box">
